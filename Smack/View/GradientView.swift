@@ -8,7 +8,7 @@
 
 import UIKit
 
-@IBDesignable
+@IBDesignable // See this in storyboard.
 class GradientView: UIView {
     
     /*
@@ -57,4 +57,4 @@ class GradientView: UIView {
     
 }
 
-// GradientView: 
+// GradientView:  
