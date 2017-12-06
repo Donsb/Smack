@@ -10,6 +10,11 @@ import UIKit
 
 class ChannelVC: UIViewController {
     
+    /*
+     IBOutlets
+     */
+    
+    @IBOutlet weak var loginBtn: UIButton!
     
     /*
      Functions
@@ -31,6 +36,12 @@ class ChannelVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    // Login Button Pressed Function.
+    @IBAction func loginBtnPressed(_ sender: Any) {
+        // Add segue to LoginVC
+        performSegue(withIdentifier: TO_LOGIN, sender: nil)
+    }
     
 }
 
