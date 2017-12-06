@@ -29,25 +29,62 @@
             </objects>
             <point key="canvasLocation" x="-18" y="-18"/>
         </scene>
-        <!--View Controller-->
+        <!--ChatVC-->
         <scene sceneID="HcE-Xw-z6O">
             <objects>
-                <viewController id="NIj-2I-Z7j" sceneMemberID="viewController">
+                <viewController id="NIj-2I-Z7j" customClass="ChatVC" customModule="Smack" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XYP-pf-WaV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LFo-P7-Unh">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="97"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TdJ-oN-WGg">
+                                        <rect key="frame" x="12" y="67" width="24" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="18" id="QXP-L0-f24"/>
+                                            <constraint firstAttribute="width" constant="24" id="xKu-zk-RhM"/>
+                                        </constraints>
+                                        <state key="normal" image="smackBurger"/>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Smack" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JrD-Uc-xCi">
+                                        <rect key="frame" x="161" y="65.666666666666671" width="52" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="0.97377445500000004" blue="0.98994120640000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.29019607843137252" green="0.30196078431372547" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="97" id="0VY-vA-oSZ"/>
+                                    <constraint firstItem="JrD-Uc-xCi" firstAttribute="centerX" secondItem="LFo-P7-Unh" secondAttribute="centerX" id="4F8-Zx-LGz"/>
+                                    <constraint firstItem="TdJ-oN-WGg" firstAttribute="leading" secondItem="LFo-P7-Unh" secondAttribute="leading" constant="12" id="SNu-hg-3G2"/>
+                                    <constraint firstItem="JrD-Uc-xCi" firstAttribute="centerY" secondItem="TdJ-oN-WGg" secondAttribute="centerY" id="ldg-PL-Myn"/>
+                                    <constraint firstAttribute="bottom" secondItem="TdJ-oN-WGg" secondAttribute="bottom" constant="12" id="w7p-Gd-mNz"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="LFo-P7-Unh" firstAttribute="leading" secondItem="J0n-yH-rlG" secondAttribute="leading" id="aJs-JK-1aL"/>
+                            <constraint firstItem="LFo-P7-Unh" firstAttribute="top" secondItem="XYP-pf-WaV" secondAttribute="top" id="sT4-Fi-tO9"/>
+                            <constraint firstItem="LFo-P7-Unh" firstAttribute="trailing" secondItem="J0n-yH-rlG" secondAttribute="trailing" id="vEO-QI-tAe"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="J0n-yH-rlG"/>
                     </view>
+                    <connections>
+                        <outlet property="menuBtn" destination="TdJ-oN-WGg" id="ksE-zu-ZH1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8bA-oK-uDb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="951" y="464"/>
+            <point key="canvasLocation" x="949.60000000000002" y="463.30049261083747"/>
         </scene>
-        <!--View Controller-->
+        <!--ChannelVC-->
         <scene sceneID="Pdr-Ji-MBH">
             <objects>
-                <viewController id="Ifx-nd-qtZ" sceneMemberID="viewController">
+                <viewController id="Ifx-nd-qtZ" customClass="ChannelVC" customModule="Smack" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Hqm-zh-WlZ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -60,4 +97,7 @@
             <point key="canvasLocation" x="951" y="-262"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="smackBurger" width="40" height="40"/>
+    </resources>
 </document>
