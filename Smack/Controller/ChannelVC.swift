@@ -9,31 +9,31 @@
 import UIKit
 
 class ChannelVC: UIViewController {
-
+    
+    
+    /*
+     Functions
+     */
+    
+    
+    // View Did Load Function.
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        // Make the Toggle of ChatVC smaller when toggled to the right; so we can see Channel VC more.
+            // .width - 60 means we only want to see 60 points of the ChatVC when toggled.
+        self.revealViewController().rearViewRevealWidth = self.view.frame.size.width - 60
     }
-
+    
+    
+    // Did Receive Memory Warning Function.
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
 }
 
-// 
+// ChannelVC:  
 
 
