@@ -31,6 +31,12 @@ class CreateAccountVC: UIViewController {
     }
     
     
+    // Close Pressed Action Function.
+    @IBAction func closePressed(_ sender: Any) {
+        performSegue(withIdentifier: UNWIND, sender: nil)
+    }
+    
+    
 }
 
-// CreateAccountVC: Created new ViewController file in Controller Group Folder called CreateAccountVC class.
+// CreateAccountVC: 

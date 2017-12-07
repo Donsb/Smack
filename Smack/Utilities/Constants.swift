@@ -12,7 +12,9 @@ import Foundation
  Segues
  */
 
-let TO_LOGIN = "toLogin"
-let TO_CREATE_ACCOUNT = "toCreateAccount"
+let TO_LOGIN = "toLogin"  // Segue to LoingVC
+let TO_CREATE_ACCOUNT = "toCreateAccount"  // Segue to CreateAccountVC
+let UNWIND = "unwindToChannel" // Unwind Segue from AccountVC to ChannelVC
+
 
 // Constants: 
