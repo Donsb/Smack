@@ -1,5 +1,5 @@
 //
-//  LoginVC.swift
+//  CreateAccountVC.swift
 //  Smack
 //
 //  Created by Donald Belliveau on 2017-12-06.
@@ -8,12 +8,12 @@
 
 import UIKit
 
-class LoginVC: UIViewController {
+class CreateAccountVC: UIViewController {
+    
     
     /*
      Functions
      */
-    
     
     
     // View Did Load Function.
@@ -31,17 +31,6 @@ class LoginVC: UIViewController {
     }
     
     
-    // Close Pressed IB Action Function
-    @IBAction func closePressed(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    
-    // Create Account IB Action Function.
-    @IBAction func createAccountBtnPressed(_ sender: Any) {
-        performSegue(withIdentifier: TO_CREATE_ACCOUNT, sender: nil)
-    }
-    
-    
 }
-// LoginVC:
+
+// CreateAccountVC: Created new ViewController file in Controller Group Folder called CreateAccountVC class.
