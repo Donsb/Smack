@@ -17,4 +17,12 @@ let TO_CREATE_ACCOUNT = "toCreateAccount"  // Segue to CreateAccountVC
 let UNWIND = "unwindToChannel" // Unwind Segue from AccountVC to ChannelVC
 
 
+/*
+ User Defaults
+ */
+
+let TOKEN_KEY = "token"
+let LOGGED_IN_KEY = "loggedIn"
+let USER_EMAIL = "userEmail"
+
 // Constants: 
