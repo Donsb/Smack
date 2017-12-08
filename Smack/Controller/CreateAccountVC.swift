@@ -10,6 +10,16 @@ import UIKit
 
 class CreateAccountVC: UIViewController {
     
+    /*
+     IBOutlets
+     */
+    
+    @IBOutlet weak var userNameTxt: UITextField! // username Text Field
+    @IBOutlet weak var emailTxt: UITextField! // Email Text Field
+    @IBOutlet weak var passwordTxt: UITextField! // Password Text Field
+    @IBOutlet weak var userImg: UIImageView! // Image View
+    
+    
     
     /*
      Functions
@@ -34,6 +44,36 @@ class CreateAccountVC: UIViewController {
     // Close Pressed Action Function.
     @IBAction func closePressed(_ sender: Any) {
         performSegue(withIdentifier: UNWIND, sender: nil)
+    }
+    
+    
+    // Create Account Btn Pressed Function
+        //-> Grab username and password.
+    @IBAction func createAccountPressed(_ sender: Any) {
+        // Grab email text.
+        guard let email = emailTxt.text , emailTxt.text != "" else {return}
+        
+        // Grab Password text.
+        guard let pass = passwordTxt.text , passwordTxt.text != "" else {return}
+        
+     // Call register Function from AuthService.  Pass it email and pass.
+        AuthService.instance.registerUser(email: email, password: pass) { (success) in
+            if success {
+                print("registered user!")
+            }
+        }
+    }
+    
+    
+    // Pick Avatar Btn Pressed Function
+    @IBAction func pickAvatarPressed(_ sender: Any) {
+        
+    }
+    
+    
+    // Pick Background Colour Btn Pressed Function.
+    @IBAction func pickBGColourPressed(_ sender: Any) {
+        
     }
     
     
