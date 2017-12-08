@@ -19,7 +19,12 @@ class CreateAccountVC: UIViewController {
     @IBOutlet weak var passwordTxt: UITextField! // Password Text Field
     @IBOutlet weak var userImg: UIImageView! // Image View
     
+    /*
+     Instance Variables
+     */
     
+    var avatarName = "profileDefualt" // with a Default Name.
+    var avatarColor = "[0.5, 0.5, 0.5, 1]" // String Array of the RGB aplha properties colour.
     
     /*
      Functions
@@ -50,6 +55,10 @@ class CreateAccountVC: UIViewController {
     // Create Account Btn Pressed Function
         //-> Grab username and password.
     @IBAction func createAccountPressed(_ sender: Any) {
+        
+        // Grab Username text.
+        guard let userName = userNameTxt.text, userNameTxt.text != "" else { return }
+        
         // Grab email text.
         guard let email = emailTxt.text , emailTxt.text != "" else {return}
         
@@ -61,12 +70,17 @@ class CreateAccountVC: UIViewController {
             if success {
                 AuthService.instance.loginUser(email: email, password: pass, completion: { (success) in
                     if success {
-                        print("logged in user!", AuthService.instance.authToken)
+                        AuthService.instance.createUser(name: userName, email: email, avatarName: self.avatarName, avatarColor: self.avatarColor, completion: { (success) in
+                            if success {
+                                print("TEST RESULT: \(UserDataService.instance.name), \(UserDataService.instance.avatarName)")
+                                self.performSegue(withIdentifier: UNWIND, sender: nil)
+                            }
+                        })
                     }
                 })
             }
         }
-    }
+    } // END Create Account Btn Pressed Function.
     
     
     // Log In User Function.
