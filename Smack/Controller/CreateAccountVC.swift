@@ -59,9 +59,19 @@ class CreateAccountVC: UIViewController {
      // Call register Function from AuthService.  Pass it email and pass.
         AuthService.instance.registerUser(email: email, password: pass) { (success) in
             if success {
-                print("registered user!")
+                AuthService.instance.loginUser(email: email, password: pass, completion: { (success) in
+                    if success {
+                        print("logged in user!", AuthService.instance.authToken)
+                    }
+                })
             }
         }
+    }
+    
+    
+    // Log In User Function.
+    func loginUser() {
+        
     }
     
     
@@ -80,3 +90,10 @@ class CreateAccountVC: UIViewController {
 }
 
 // CreateAccountVC: 
+
+
+
+
+
+
+

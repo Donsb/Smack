@@ -16,6 +16,7 @@ typealias CompletionHandler = (_ Success: Bool) -> ()
 
 let BASE_URL = "https://donslack.herokuapp.com/v1/"
 let URL_REGISTER = "\(BASE_URL)account/register"
+let URL_LOGIN = "\(BASE_URL)account/login"
 
 /*
  Segues
@@ -33,5 +34,15 @@ let UNWIND = "unwindToChannel" // Unwind Segue from AccountVC to ChannelVC
 let TOKEN_KEY = "token"
 let LOGGED_IN_KEY = "loggedIn"
 let USER_EMAIL = "userEmail"
+
+
+/*
+ Headers
+ */
+
+// Header in JSON format
+let HEADER = [
+    "Content-Type" : "application/json; charset=utf-8"
+]
 
 // Constants: 
