@@ -26,6 +26,7 @@ let URL_USER_ADD = "\(BASE_URL)user/add"
 let TO_LOGIN = "toLogin"  // Segue to LoingVC
 let TO_CREATE_ACCOUNT = "toCreateAccount"  // Segue to CreateAccountVC
 let UNWIND = "unwindToChannel" // Unwind Segue from AccountVC to ChannelVC
+let TO_AVATAR_PICKER = "toAvatarPicker"  // Segue to Avatar Picker screen
 
 
 /*
