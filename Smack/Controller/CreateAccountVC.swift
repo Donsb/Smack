@@ -57,7 +57,7 @@ class CreateAccountVC: UIViewController {
     @IBAction func createAccountPressed(_ sender: Any) {
         
         // Grab Username text.
-        guard let userName = userNameTxt.text, userNameTxt.text != "" else { return }
+        guard let name = userNameTxt.text, userNameTxt.text != "" else { return }
         
         // Grab email text.
         guard let email = emailTxt.text , emailTxt.text != "" else {return}
@@ -68,11 +68,13 @@ class CreateAccountVC: UIViewController {
      // Call register Function from AuthService.  Pass it email and pass.
         AuthService.instance.registerUser(email: email, password: pass) { (success) in
             if success {
+                print("Success 1")
                 AuthService.instance.loginUser(email: email, password: pass, completion: { (success) in
                     if success {
-                        AuthService.instance.createUser(name: userName, email: email, avatarName: self.avatarName, avatarColor: self.avatarColor, completion: { (success) in
+                        print("Success 2")
+                        AuthService.instance.createUser(name: name, email: email, avatarName: self.avatarName, avatarColor: self.avatarColor, completion: { (success) in
                             if success {
-                                print("TEST RESULT: \(UserDataService.instance.name), \(UserDataService.instance.avatarName)")
+                                print(UserDataService.instance.name, UserDataService.instance.avatarName)
                                 self.performSegue(withIdentifier: UNWIND, sender: nil)
                             }
                         })
