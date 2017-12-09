@@ -39,6 +39,18 @@ class CreateAccountVC: UIViewController {
     }
     
     
+    // Update Avatar once selected.
+    override func viewDidAppear(_ animated: Bool) {
+        if UserDataService.instance.avatarName != "" {
+            // Set the image once selected.
+            userImg.image = UIImage(named: UserDataService.instance.avatarName)
+            
+            // Set the local avatar name for when creating an account.
+            avatarName = UserDataService.instance.avatarName
+        }
+    }
+    
+    
     // Did Receive Memory Warning Function.
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

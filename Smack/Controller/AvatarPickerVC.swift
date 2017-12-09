@@ -82,6 +82,39 @@ class AvatarPickerVC: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     
+    // Collection View Layout Function
+        // Size our cells and decide on number of Rows based on device.
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        // calculate the number of columns and size of cells based on screen size.
+        var numberOfColumns: CGFloat = 3
+        if UIScreen.main.bounds.width > 320 {
+            // 320 is the size of the iPhone SE.
+            numberOfColumns = 4
+        }
+        
+        let spaceBetweenCells: CGFloat = 10
+        let padding: CGFloat = 40
+        // Take entire width subtract padding of both sides.  Then Subtract Gap bewteen cells.
+        // Take the remaining which the the width of the cells and divide by number of columns.
+        let cellDimension = ((collectionView.bounds.width - padding) - (numberOfColumns - 1) * spaceBetweenCells) / numberOfColumns
+        
+        return CGSize(width: cellDimension, height: cellDimension)
+    }
+    
+    
+    // Select an Avatar
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if avatarType == .dark {
+            UserDataService.instance.setAvatarName(avatarName: "dark\(indexPath.item)")
+        } else {
+            UserDataService.instance.setAvatarName(avatarName: "light\(indexPath.item)")
+        }
+        // Dismiss the screen.
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
 } // END Class
 
 
