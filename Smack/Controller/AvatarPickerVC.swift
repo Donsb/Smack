@@ -17,7 +17,11 @@ class AvatarPickerVC: UIViewController, UICollectionViewDelegate, UICollectionVi
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var segmentControl: UISegmentedControl!
     
+    /*
+     Instance Variables
+     */
     
+    var avatarType = AvatarType.dark // default dark.
     
     /*
      Functions
@@ -47,13 +51,19 @@ class AvatarPickerVC: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     // Segment Control Changed Function.
     @IBAction func segmentControlChanged(_ sender: Any) {
-        
+        if segmentControl.selectedSegmentIndex == 0 {
+            avatarType = .dark
+        } else {
+            avatarType = .light
+        }
+        collectionView.reloadData() // This updates our CollectionView Functions.
     }
     
     
     // Cell For Item At Function
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "avatarCell", for: indexPath) as? AvatarCell {
+            cell.configureCell(index: indexPath.item, type: avatarType)
             return cell
         }
         return AvatarCell()

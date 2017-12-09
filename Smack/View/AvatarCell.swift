@@ -8,6 +8,12 @@
 
 import UIKit
 
+// Enum for Avatar Types
+enum AvatarType {
+    case dark
+    case light
+}
+
 class AvatarCell: UICollectionViewCell {
     
     /*
@@ -36,6 +42,17 @@ class AvatarCell: UICollectionViewCell {
         self.clipsToBounds = true // avoids the layer doesn't spill ostide the corner radius.
     }
     
+    
+    // Configuration Cell Function
+    func configureCell(index: Int, type: AvatarType) {
+        if type == AvatarType.dark {
+            avatarImage.image = UIImage(named: "dark\(index)")
+            self.layer.backgroundColor = UIColor.lightGray.cgColor
+        } else {
+            avatarImage.image = UIImage(named: "light\(index)")
+            self.layer.backgroundColor = UIColor.gray.cgColor
+        }
+    }
     
 } // End Class.
 
