@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AvatarPickerVC: UIViewController {
+class AvatarPickerVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     /*
      IBOutlets
@@ -27,7 +27,8 @@ class AvatarPickerVC: UIViewController {
     // View Did Load Function
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        collectionView.delegate = self
+        collectionView.dataSource = self
     }
     
     
@@ -49,11 +50,32 @@ class AvatarPickerVC: UIViewController {
         
     }
     
+    
+    // Cell For Item At Function
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "avatarCell", for: indexPath) as? AvatarCell {
+            return cell
+        }
+        return AvatarCell()
+    }
+    
+    
+    // Number Of Sections Function
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    
+    // Number Of Items in Section Function
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 28 // We have 28 items in Assets (28 Dark and 28 Light
+    }
+    
+    
 } // END Class
 
 
 
 // AvatarPickerVC:  
-
 
 
