@@ -175,6 +175,7 @@ class AuthService {
                     guard let name = data["name"] as? String else { return }
                     
                     UserDataService.instance.setUserData(id: id, color: color, avatarName: avatarName, email: email, name: name)
+                    completion(true)
                 }
     
             } else {
