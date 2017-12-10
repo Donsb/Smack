@@ -16,6 +16,7 @@ class ChannelVC: UIViewController {
     
     @IBOutlet weak var loginBtn: UIButton!
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {}
+    @IBOutlet weak var userImage: CircleImage!
     
     /*
      Functions
@@ -28,6 +29,9 @@ class ChannelVC: UIViewController {
         // Make the Toggle of ChatVC smaller when toggled to the right; so we can see Channel VC more.
             // .width - 60 means we only want to see 60 points of the ChatVC when toggled.
         self.revealViewController().rearViewRevealWidth = self.view.frame.size.width - 60
+        
+        // Observer
+        NotificationCenter.default.addObserver(self, selector: #selector(ChannelVC.userDataDidChange(_:)), name: NOTIF_USER_DATA_DID_CHANGE, object: nil)
     }
     
     
@@ -42,6 +46,19 @@ class ChannelVC: UIViewController {
     @IBAction func loginBtnPressed(_ sender: Any) {
         // Add segue to LoginVC
         performSegue(withIdentifier: TO_LOGIN, sender: nil)
+    }
+    
+    
+    // User Data Did Change Function.
+    @objc func userDataDidChange(_ notif: Notification) {
+        if AuthService.instance.isLoggedIn {
+            loginBtn.setTitle(UserDataService.instance.name, for: .normal) // Change login to be userName.
+            userImage.image = UIImage(named: UserDataService.instance.avatarName) // Change image to Avatar
+        } else {
+            loginBtn.setTitle("Login", for: .normal) // Set title back to Login
+            userImage.image = UIImage(named: "menuProfileIcon") // Set image back to menuProfileIcon
+            userImage.backgroundColor = UIColor.clear // Set background colour to clear.
+        }
     }
     
 }
