@@ -25,6 +25,7 @@ class CreateAccountVC: UIViewController {
     
     var avatarName = "profileDefualt" // with a Default Name.
     var avatarColor = "[0.5, 0.5, 0.5, 1]" // String Array of the RGB aplha properties colour.
+    var bgColor: UIColor? // Optional UIColor for Avatar color
     
     /*
      Functions
@@ -39,7 +40,7 @@ class CreateAccountVC: UIViewController {
     }
     
     
-    // Update Avatar once selected.
+    // View Did Appear Function.  Updates Avatar once selected.
     override func viewDidAppear(_ animated: Bool) {
         if UserDataService.instance.avatarName != "" {
             // Set the image once selected.
@@ -47,6 +48,11 @@ class CreateAccountVC: UIViewController {
             
             // Set the local avatar name for when creating an account.
             avatarName = UserDataService.instance.avatarName
+            
+            // Set a light grey bg color if avatar type is light.
+            if avatarName.contains("light") && bgColor == nil {
+                userImg.backgroundColor = UIColor.lightGray
+            }
         }
     }
     
@@ -111,7 +117,15 @@ class CreateAccountVC: UIViewController {
     
     // Pick Background Colour Btn Pressed Function.
     @IBAction func pickBGColourPressed(_ sender: Any) {
+        // Randomly Generated Numbers for the R-G-B
+        let r = CGFloat(arc4random_uniform(255)) / 255 // 1-255 divided by 255
+        let g = CGFloat(arc4random_uniform(255)) / 255
+        let b = CGFloat(arc4random_uniform(255)) / 255
         
+        // Set bcColor
+        bgColor = UIColor(red: r, green: g, blue: b, alpha: 1) // 1 alpha, not transparent.
+        
+        self.userImg.backgroundColor = bgColor
     }
     
     

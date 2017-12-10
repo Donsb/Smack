@@ -78,7 +78,7 @@ class AvatarPickerVC: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     // Number Of Items in Section Function
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 28 // We have 28 items in Assets (28 Dark and 28 Light
+        return 28 // We have 28 items in Assets (28 Dark and 28 Light)
     }
     
     
