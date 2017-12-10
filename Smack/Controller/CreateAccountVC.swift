@@ -18,6 +18,7 @@ class CreateAccountVC: UIViewController {
     @IBOutlet weak var emailTxt: UITextField! // Email Text Field
     @IBOutlet weak var passwordTxt: UITextField! // Password Text Field
     @IBOutlet weak var userImg: UIImageView! // Image View
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     /*
      Instance Variables
@@ -35,8 +36,7 @@ class CreateAccountVC: UIViewController {
     // View Did Load Function.
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setUpView()
     }
     
     
@@ -74,6 +74,10 @@ class CreateAccountVC: UIViewController {
         //-> Grab username and password.
     @IBAction func createAccountPressed(_ sender: Any) {
         
+        // Activity indicator status
+        spinner.isHidden = false // Show the Activity Indicator.
+        spinner.startAnimating() // Make it spin.
+        
         // Grab Username text.
         guard let name = userNameTxt.text, userNameTxt.text != "" else { return }
         
@@ -92,8 +96,10 @@ class CreateAccountVC: UIViewController {
                         print("Success 2")
                         AuthService.instance.createUser(name: name, email: email, avatarName: self.avatarName, avatarColor: self.avatarColor, completion: { (success) in
                             if success {
-                                print(UserDataService.instance.name, UserDataService.instance.avatarName)
+                                self.spinner.isHidden = true // Hide Activity Indicator
+                                self.spinner.stopAnimating() // Stop Activity spinning.
                                 self.performSegue(withIdentifier: UNWIND, sender: nil)
+                                NotificationCenter.default.post(name: NOTIF_USER_DATA_DID_CHANGE, object: nil) // Posts to all classes
                             }
                         })
                     }
@@ -124,10 +130,31 @@ class CreateAccountVC: UIViewController {
         
         // Set bcColor
         bgColor = UIColor(red: r, green: g, blue: b, alpha: 1) // 1 alpha, not transparent.
-        
-        self.userImg.backgroundColor = bgColor
+        UIView.animate(withDuration: 0.2) {
+            self.userImg.backgroundColor = self.bgColor
+        }
     }
     
+    
+    // Set Up View
+    func setUpView() {
+        spinner.isHidden = true // Start with it hidden
+        userNameTxt.attributedPlaceholder = NSAttributedString(string: "username", attributes: [NSAttributedStringKey.foregroundColor: SMACK_PURPLE_PLACEHOLDER])
+        emailTxt.attributedPlaceholder = NSAttributedString(string: "email", attributes: [NSAttributedStringKey.foregroundColor: SMACK_PURPLE_PLACEHOLDER])
+        passwordTxt.attributedPlaceholder = NSAttributedString(string: "password", attributes: [NSAttributedStringKey.foregroundColor: SMACK_PURPLE_PLACEHOLDER])
+        let tap = UITapGestureRecognizer(target: self, action: #selector(CreateAccountVC.handleTap))
+        view.addGestureRecognizer(tap) // add to our view.
+    }
+    
+    
+    // Handle Tap Function
+        // -> This will clear away keyboard if they click outside the keyboard.
+    @objc func handleTap() {
+        view.endEditing(true) // Causes the view to dismiss the keyboard.
+    }
+    
+    
+    // Reusable Notification
     
 }
 

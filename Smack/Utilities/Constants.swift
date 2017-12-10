@@ -30,6 +30,19 @@ let TO_AVATAR_PICKER = "toAvatarPicker"  // Segue to Avatar Picker screen
 
 
 /*
+ Colours
+ */
+
+let SMACK_PURPLE_PLACEHOLDER = #colorLiteral(red: 0.2588235294, green: 0.3294117647, blue: 0.7254901961, alpha: 0.5)
+
+
+/*
+ Notofication Constants
+ */
+
+let NOTIF_USER_DATA_DID_CHANGE = Notification.Name("notifUserDataChanged")
+
+/*
  User Defaults
  */
 
