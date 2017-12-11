@@ -157,32 +157,63 @@ class AuthService {
         ]
         
         
-        // Header.
-        let header = [
-            "Authorization": "Bearer \(AuthService.instance.authToken)",
-            "Content-Type" : "application/json; charset=utf-8"
-        ]
-        
-        
         // Web Request -> Alamofire request.
-        Alamofire.request(URL_USER_ADD, method: .post, parameters: body, encoding: JSONEncoding.default, headers: header).responseJSON { (response) in
+        Alamofire.request(URL_USER_ADD, method: .post, parameters: body, encoding: JSONEncoding.default, headers: BEARER_HEADER).responseJSON { (response) in
             if response.result.error == nil {
+                
                 if let data = response.result.value as? Dictionary<String, Any> {
-                    guard let id = data["_id"] as? String else { return }
-                    guard let color = data["avatarColor"] as? String else { return }
-                    guard let avatarName = data["avatarName"] as? String else { return }
-                    guard let email = data["email"] as? String else { return }
-                    guard let name = data["name"] as? String else { return }
                     
-                    UserDataService.instance.setUserData(id: id, color: color, avatarName: avatarName, email: email, name: name)
+                    self.setUserInfo(data: data)
                     completion(true)
+                    
                 }
     
             } else {
+                
                 completion(false)
                 debugPrint(response.result.error as Any)
+                
             }
         }
+    }
+    
+    
+    // Find User By Email Function.
+    func findUserByEmail(completion: @escaping CompletionHandler) {
+        
+        // Web Request. This is called after login, so we have access to userEmail for this call.
+        Alamofire.request("\(URL_USER_BY_EMAIL)\(userEmail)", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: BEARER_HEADER).responseJSON { (response) in
+            
+            if response.result.error == nil {
+                
+                if let data = response.result.value as? Dictionary<String, Any> {
+                    
+                    self.setUserInfo(data: data)
+                    completion(true)
+                    
+                }
+                
+            } else {
+                
+                completion(false)
+                debugPrint(response.result.error as Any)
+                
+            }
+        }
+    }
+    
+    
+    // Set User Info Function for Web Request.
+    func setUserInfo(data: Dictionary<String, Any>) {
+        
+        guard let id = data["_id"] as? String else { return }
+        guard let color = data["avatarColor"] as? String else { return }
+        guard let avatarName = data["avatarName"] as? String else { return }
+        guard let email = data["email"] as? String else { return }
+        guard let name = data["name"] as? String else { return }
+        
+        UserDataService.instance.setUserData(id: id, color: color, avatarName: avatarName, email: email, name: name)
+        
     }
     
     
@@ -193,4 +224,26 @@ class AuthService {
 
 
 // AuthService: 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
