@@ -11,16 +11,23 @@ import UIKit
 class LoginVC: UIViewController {
     
     /*
-     Functions
+     IBOutlets
      */
     
+    @IBOutlet weak var userName: UITextField!  // Was supposed to be email not userName.
+    @IBOutlet weak var passwordTxt: UITextField!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    
+    
+    /*
+     Functions
+     */
     
     
     // View Did Load Function.
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setUpView()
     }
     
     
@@ -43,5 +50,74 @@ class LoginVC: UIViewController {
     }
     
     
-}
-// LoginVC:
+    @IBAction func loginPressed(_ sender: Any) {
+        
+        // Show spinner and make it spin.
+        spinner.isHidden = false
+        spinner.startAnimating()
+        
+        // Verify email and Password aren't empty.
+        guard let email = userName.text , userName.text != "" else { return }
+        guard let password = passwordTxt.text , passwordTxt.text != "" else { return }
+        
+        // Send to Server
+        AuthService.instance.loginUser(email: email, password: password) { (success) in
+            if success {
+                
+                // Is log in was successful, call User By EMail Function to fill in our UserDataService Variables.
+                AuthService.instance.findUserByEmail(completion: { (success) in
+                    if success {
+                        
+                        // Send out Notification that user data changed.
+                        NotificationCenter.default.post(name: NOTIF_USER_DATA_DID_CHANGE, object: nil)
+                        
+                        //Hide and stop spinner
+                        self.spinner.isHidden = true
+                        self.spinner.stopAnimating()
+                        
+                        // Dismiss the screen once logged in.
+                        self.dismiss(animated: true, completion: nil)
+                        
+                    }
+                })
+            }
+        }
+        
+    }
+    
+    
+    //
+    func setUpView() {
+        
+        // Hide Spinner to begin.
+        spinner.isHidden = true
+        
+        // Set up our Placeholders for the text fields.
+        userName.attributedPlaceholder = NSAttributedString(string: "username", attributes: [NSAttributedStringKey.foregroundColor: SMACK_PURPLE_PLACEHOLDER])
+        passwordTxt.attributedPlaceholder = NSAttributedString(string: "password", attributes: [NSAttributedStringKey.foregroundColor: SMACK_PURPLE_PLACEHOLDER])
+        
+    }
+    
+    
+} // END class
+
+
+
+// LoginVC:  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

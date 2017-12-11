@@ -312,11 +312,19 @@
                                         <real key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="loginPressed:" destination="qwi-fn-bO6" eventType="touchUpInside" id="ijH-Qu-xtm"/>
+                                </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="jZW-A0-F19">
+                                <rect key="frame" x="169" y="287.66666666666669" width="37" height="37"/>
+                                <color key="color" red="0.25882352939999997" green="0.3294117647" blue="0.72549019609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="vsy-Mv-cTb" firstAttribute="top" secondItem="hvC-X8-Znm" secondAttribute="bottom" constant="40" id="AE3-3t-wUQ"/>
+                            <constraint firstItem="jZW-A0-F19" firstAttribute="centerY" secondItem="B6u-VL-vtW" secondAttribute="centerY" constant="-100" id="AGn-LP-jm8"/>
                             <constraint firstItem="8No-Zw-hCu" firstAttribute="top" secondItem="tLF-ly-xub" secondAttribute="top" constant="8" id="C9f-uQ-0Fy"/>
                             <constraint firstItem="2jw-UX-ZtH" firstAttribute="top" secondItem="DZd-fV-YIb" secondAttribute="bottom" id="Ivp-u3-TRv"/>
                             <constraint firstItem="hvC-X8-Znm" firstAttribute="top" secondItem="tLF-ly-xub" secondAttribute="top" constant="60" id="L6n-7Y-Ilw"/>
@@ -324,12 +332,16 @@
                             <constraint firstItem="DZd-fV-YIb" firstAttribute="centerX" secondItem="B6u-VL-vtW" secondAttribute="centerX" id="Raa-sA-LIm"/>
                             <constraint firstItem="DZd-fV-YIb" firstAttribute="top" secondItem="vsy-Mv-cTb" secondAttribute="bottom" constant="40" id="UVx-ZP-ck8"/>
                             <constraint firstItem="vsy-Mv-cTb" firstAttribute="centerX" secondItem="B6u-VL-vtW" secondAttribute="centerX" id="Uk8-RZ-KgC"/>
+                            <constraint firstItem="jZW-A0-F19" firstAttribute="centerX" secondItem="B6u-VL-vtW" secondAttribute="centerX" id="lQ9-eO-8zu"/>
                             <constraint firstItem="tLF-ly-xub" firstAttribute="trailing" secondItem="8No-Zw-hCu" secondAttribute="trailing" constant="16" id="pCb-SE-fKq"/>
                             <constraint firstItem="2jw-UX-ZtH" firstAttribute="centerX" secondItem="B6u-VL-vtW" secondAttribute="centerX" id="qPz-cH-F4e"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tLF-ly-xub"/>
                     </view>
                     <connections>
+                        <outlet property="passwordTxt" destination="yse-GS-rLn" id="mYH-3B-TFS"/>
+                        <outlet property="spinner" destination="jZW-A0-F19" id="yzp-vO-22L"/>
+                        <outlet property="userName" destination="bOi-gk-IkE" id="56b-jb-9Aw"/>
                         <segue destination="s7r-vF-9vl" kind="show" identifier="toCreateAccount" id="xdk-dm-lYo"/>
                     </connections>
                 </viewController>

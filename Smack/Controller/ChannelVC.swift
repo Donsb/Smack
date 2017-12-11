@@ -32,6 +32,13 @@ class ChannelVC: UIViewController {
         
         // Observer
         NotificationCenter.default.addObserver(self, selector: #selector(ChannelVC.userDataDidChange(_:)), name: NOTIF_USER_DATA_DID_CHANGE, object: nil)
+        
+    }
+    
+    
+    // View Did Appear.
+    override func viewDidAppear(_ animated: Bool) {
+        setupUserInfo()
     }
     
     
@@ -68,6 +75,14 @@ class ChannelVC: UIViewController {
     
     // User Data Did Change Function.
     @objc func userDataDidChange(_ notif: Notification) {
+        
+        setupUserInfo()
+        
+    }
+    
+    
+    // Setup User Info Function
+    func setupUserInfo() {
         if AuthService.instance.isLoggedIn {
             loginBtn.setTitle(UserDataService.instance.name, for: .normal) // Change login to be userName.
             userImage.image = UIImage(named: UserDataService.instance.avatarName) // Change image to Avatar
@@ -79,8 +94,21 @@ class ChannelVC: UIViewController {
         }
     }
     
+    
 }
 
 // ChannelVC:  
+
+
+
+
+
+
+
+
+
+
+
+
 
 

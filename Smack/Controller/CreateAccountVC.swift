@@ -90,10 +90,8 @@ class CreateAccountVC: UIViewController {
      // Call register Function from AuthService.  Pass it email and pass.
         AuthService.instance.registerUser(email: email, password: pass) { (success) in
             if success {
-                print("Success 1")
                 AuthService.instance.loginUser(email: email, password: pass, completion: { (success) in
                     if success {
-                        print("Success 2")
                         AuthService.instance.createUser(name: name, email: email, avatarName: self.avatarName, avatarColor: self.avatarColor, completion: { (success) in
                             if success {
                                 self.spinner.isHidden = true // Hide Activity Indicator
@@ -159,7 +157,7 @@ class CreateAccountVC: UIViewController {
     
 }
 
-// CreateAccountVC: 
+// CreateAccountVC:  
 
 
 

@@ -163,13 +163,22 @@ class AuthService {
                 
                 if let data = response.result.value as? Dictionary<String, Any> {
                     
-                    self.setUserInfo(data: data)
+                    guard let id = data["_id"] as? String else { return }
+                    guard let color = data["avatarColor"] as? String else { return }
+                    guard let avatarName = data["avatarName"] as? String else { return }
+                    guard let email = data["email"] as? String else { return }
+                    guard let name = data["name"] as? String else { return }
+                    
+                    UserDataService.instance.setUserData(id: id, color: color, avatarName: avatarName, email: email, name: name)
+                    
+                    //self.setUserInfo(data: data)
                     completion(true)
                     
                 }
     
             } else {
                 
+                print("Error in Create User")
                 completion(false)
                 debugPrint(response.result.error as Any)
                 
@@ -187,33 +196,26 @@ class AuthService {
             if response.result.error == nil {
                 
                 if let data = response.result.value as? Dictionary<String, Any> {
+                    guard let id = data["_id"] as? String else { return }
+                    guard let color = data["avatarColor"] as? String else { return }
+                    guard let avatarName = data["avatarName"] as? String else { return }
+                    guard let email = data["email"] as? String else { return }
+                    guard let name = data["name"] as? String else { return }
                     
-                    self.setUserInfo(data: data)
+                    UserDataService.instance.setUserData(id: id, color: color, avatarName: avatarName, email: email, name: name)
+                    
+                    //self.setUserInfo(data: data)
                     completion(true)
                     
                 }
                 
             } else {
-                
+                print("Error in AuthService Find User By Email")
                 completion(false)
                 debugPrint(response.result.error as Any)
                 
             }
         }
-    }
-    
-    
-    // Set User Info Function for Web Request.
-    func setUserInfo(data: Dictionary<String, Any>) {
-        
-        guard let id = data["_id"] as? String else { return }
-        guard let color = data["avatarColor"] as? String else { return }
-        guard let avatarName = data["avatarName"] as? String else { return }
-        guard let email = data["email"] as? String else { return }
-        guard let name = data["name"] as? String else { return }
-        
-        UserDataService.instance.setUserData(id: id, color: color, avatarName: avatarName, email: email, name: name)
-        
     }
     
     

@@ -33,6 +33,13 @@ class ChatVC: UIViewController {
         
         // Tap on the Chat while it's toggled to the right and it returns you to the ChatVC.
         self.view.addGestureRecognizer(self.revealViewController().tapGestureRecognizer())
+        
+        // Check if logged in, if we are send out Notification User data has changed.
+        if AuthService.instance.isLoggedIn {
+            AuthService.instance.findUserByEmail(completion: { (success) in
+                NotificationCenter.default.post(name: NOTIF_USER_DATA_DID_CHANGE, object: nil)
+            })
+        }
     }
     
     
@@ -46,3 +53,22 @@ class ChatVC: UIViewController {
 }
 
 // ChatVC: 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
