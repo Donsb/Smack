@@ -54,6 +54,7 @@ class ChannelVC: UIViewController {
         if AuthService.instance.isLoggedIn {
             loginBtn.setTitle(UserDataService.instance.name, for: .normal) // Change login to be userName.
             userImage.image = UIImage(named: UserDataService.instance.avatarName) // Change image to Avatar
+            userImage.backgroundColor = UserDataService.instance.returnUIColor(components: UserDataService.instance.avatarColor) // Set Background colour.
         } else {
             loginBtn.setTitle("Login", for: .normal) // Set title back to Login
             userImage.image = UIImage(named: "menuProfileIcon") // Set image back to menuProfileIcon
