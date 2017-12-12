@@ -8,7 +8,7 @@
 
 import Foundation
 import Alamofire
-//import SwiftyJSON
+import SwiftyJSON
 
 class AuthService {
     
@@ -33,8 +33,9 @@ class AuthService {
     
     
     // Auth Toke Variable Getter and Setter.
-    var authToken: String {
+    var authToken: String? {
         get {
+            
             return defaults.value(forKey: TOKEN_KEY) as! String // Cast as String because defaults value is an Optional any.
         }
         set {
@@ -106,30 +107,35 @@ class AuthService {
                 
                 // JASON Parsing-> Cast as a Dictionary.
                 if let json = response.result.value as? Dictionary<String, Any> {
-                    // Check to see if our email equals the user key from JSON Object, cast as a String.
-                    if let email = json["user"] as? String {
-                        // If there is, set userEmail Default Variable as that user JSON Object response.
-                        self.userEmail = email
+                    
+                    guard let data = response.data else { return }
+                    do {
+                        
+                        let json = try JSON(data:data)
+                        
+                        self.userEmail = json["user"].stringValue
+                        self.authToken = json["token"].stringValue
+                        
+                        /* Apple Way
+                         // Check to see if our email equals the user key from JSON Object, cast as a String.
+                         if let email = json["user"] as? String {
+                         // If there is, set userEmail Default Variable as that user JSON Object response.
+                         self.userEmail = email
+                         }
+                         // Create constant token as a String if JSON Object contains a Key "token"
+                         if let token = json["token"] as? String {
+                         // If we find it, place token value inside authToken Default Variable.
+                         self.authToken = token
+                         }
+                         */
+                        
+                    } catch {
+                        
+                        debugPrint(error as Any)
+                        
                     }
-                    // Create constant token as a String if JSON Object contains a Key "token"
-                    if let token = json["token"] as? String {
-                        // If we find it, place token value inside authToken Default Variable.
-                        self.authToken = token
-                    }
+                    
                 } // END JSON Parsing.
-                
-                
-                /*
-                 
-                 // SwiftyJSON Parsing
-                 
-                 guard let data = response.data else { return }
-                 let json = JSON(data: data)
-                 self.userEmail = json["user"].stringValue
-                 self.authToken = json["toek"].stringValue
-                 
-                 */
-                
                 
                 // Set isLggedIn to true.
                 self.isLoggedIn = true
@@ -161,21 +167,36 @@ class AuthService {
         Alamofire.request(URL_USER_ADD, method: .post, parameters: body, encoding: JSONEncoding.default, headers: BEARER_HEADER).responseJSON { (response) in
             if response.result.error == nil {
                 
-                if let data = response.result.value as? Dictionary<String, Any> {
+                //if let data = response.result.value as? Dictionary<String, Any> {
+                    guard let data = response.data else { return }
                     
-                    guard let id = data["_id"] as? String else { return }
-                    guard let color = data["avatarColor"] as? String else { return }
-                    guard let avatarName = data["avatarName"] as? String else { return }
-                    guard let email = data["email"] as? String else { return }
-                    guard let name = data["name"] as? String else { return }
-                    
-                    UserDataService.instance.setUserData(id: id, color: color, avatarName: avatarName, email: email, name: name)
-                    
-                    //self.setUserInfo(data: data)
-                    completion(true)
-                    
-                }
-    
+                    do {
+                        let json = try JSON(data: data)
+                        
+                        let id = json["_id"].stringValue
+                        let color = json["avatarColor"].stringValue
+                        let avatarName = json["avatarName"].stringValue
+                        let email = json["email"].stringValue
+                        let name = json["name"].stringValue
+                        
+                        UserDataService.instance.setUserData(id: id, color: color, avatarName: avatarName, email: email, name: name)
+                        
+                        completion(true)
+                        
+                        /* Apple way
+                         guard let id = data["_id"] as? String else { return }
+                         guard let color = data["avatarColor"] as? String else { return }
+                         guard let avatarName = data["avatarName"] as? String else { return }
+                         guard let email = data["email"] as? String else { return }
+                         guard let name = data["name"] as? String else { return }
+                         */
+                        
+                    } catch {
+                        
+                        debugPrint(error as Any)
+                        
+                    }
+                
             } else {
                 
                 print("Error in Create User")
@@ -195,21 +216,42 @@ class AuthService {
             
             if response.result.error == nil {
                 
-                if let data = response.result.value as? Dictionary<String, Any> {
-                    guard let id = data["_id"] as? String else { return }
-                    guard let color = data["avatarColor"] as? String else { return }
-                    guard let avatarName = data["avatarName"] as? String else { return }
-                    guard let email = data["email"] as? String else { return }
-                    guard let name = data["name"] as? String else { return }
+                //if let data = response.result.value as? Dictionary<String, Any> {
                     
-                    UserDataService.instance.setUserData(id: id, color: color, avatarName: avatarName, email: email, name: name)
+                    guard let data = response.data else { return }
                     
-                    //self.setUserInfo(data: data)
+                    do {
+                        let json = try JSON(data: data)
+                        
+                        let color = json["avatarColor"].stringValue
+                        let id = json["_id"].stringValue
+                        let avatarName = json["avatarName"].stringValue
+                        let email = json["email"].stringValue
+                        let name = json["name"].stringValue
+                        
+                        UserDataService.instance.setUserData(id: id, color: color, avatarName: avatarName, email: email, name: name)
+                        
+                            // Apple Way
+//                    guard let id = data["_id"] as? String else { return }
+//                    guard let color = data["avatarColor"] as? String else { return }
+//                    guard let avatarName = data["avatarName"] as? String else { return }
+//                    guard let email = data["email"] as? String else { return }
+//                    guard let name = data["name"] as? String else { return }
+//
+//                    UserDataService.instance.setUserData(id: id, color: color, avatarName: avatarName, email: email, name: name)
+                        
+                    } catch {
+                        
+                        debugPrint(error as Any)
+                        
+                    }
+                    
                     completion(true)
                     
-                }
+                //}
                 
             } else {
+                
                 print("Error in AuthService Find User By Email")
                 completion(false)
                 debugPrint(response.result.error as Any)
@@ -225,7 +267,7 @@ class AuthService {
 
 
 
-// AuthService:  
+// AuthService: 
 
 
 
