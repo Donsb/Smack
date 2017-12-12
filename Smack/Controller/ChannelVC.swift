@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChannelVC: UIViewController {
+class ChannelVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     /*
      IBOutlets
@@ -17,6 +17,7 @@ class ChannelVC: UIViewController {
     @IBOutlet weak var loginBtn: UIButton!
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue) {}
     @IBOutlet weak var userImage: CircleImage!
+    @IBOutlet weak var tableView: UITableView!
     
     /*
      Functions
@@ -26,6 +27,11 @@ class ChannelVC: UIViewController {
     // View Did Load Function.
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Set Delegate and DataSource to self.
+        tableView.delegate = self
+        tableView.dataSource = self
+        
         // Make the Toggle of ChatVC smaller when toggled to the right; so we can see Channel VC more.
             // .width - 60 means we only want to see 60 points of the ChatVC when toggled.
         self.revealViewController().rearViewRevealWidth = self.view.frame.size.width - 60
@@ -33,11 +39,6 @@ class ChannelVC: UIViewController {
         // Observer
         NotificationCenter.default.addObserver(self, selector: #selector(ChannelVC.userDataDidChange(_:)), name: NOTIF_USER_DATA_DID_CHANGE, object: nil)
         
-        
-        // Test Channels
-        MessageService.instance.findAllChannel { (success) in
-            
-        }
     }
     
     
@@ -98,6 +99,37 @@ class ChannelVC: UIViewController {
             userImage.backgroundColor = UIColor.clear // Set background colour to clear.
         }
     }
+    
+    
+    // Cell For Row At Function.
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "channelCell", for: indexPath) as? ChannelCell {
+            
+            // Variable to pass into our TableViewCell.
+            let channel = MessageService.instance.channels[indexPath.row]
+            
+            // Call Configure Cell Function, pass in our channel variable.
+            cell.configureCell(channel: channel)
+            
+            return cell
+        } else {
+            return UITableViewCell()
+        }
+    }
+    
+    
+    // Number Of Sections
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return MessageService.instance.channels.count
+    }
+    
+    
+    // Number Of Rows In Section Function
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    
     
     
 }

@@ -31,13 +31,27 @@ class ChannelCell: UITableViewCell {
     // Set Selected Function.
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        // If a channel is selected, set up the view
+        if selected {
+            // Set background colour to White (1 being the most white) and opacity to .2 (very transparent)
+            self.layer.backgroundColor = UIColor(white: 1, alpha: 0.2).cgColor
+        } else {
+            self.layer.backgroundColor = UIColor.clear.cgColor
+        }
     }
     
     
+    // Configure Cell Function
+    func configureCell(channel: Channel) {
+        // Grab the channelTitle, ?? "" -> (or set to an empty String)
+        let title = channel.channelTitle ?? ""
+        
+        // Set our Label to the channelTitle.
+        channelName.text = title
+    }
     
-}
+    
+} // END Class
 
 
 
