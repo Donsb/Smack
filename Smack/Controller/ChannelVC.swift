@@ -33,6 +33,11 @@ class ChannelVC: UIViewController {
         // Observer
         NotificationCenter.default.addObserver(self, selector: #selector(ChannelVC.userDataDidChange(_:)), name: NOTIF_USER_DATA_DID_CHANGE, object: nil)
         
+        
+        // Test Channels
+        MessageService.instance.findAllChannel { (success) in
+            
+        }
     }
     
     
