@@ -47,7 +47,7 @@ class ChannelCell: UITableViewCell {
         let title = channel.channelTitle ?? ""
         
         // Set our Label to the channelTitle.
-        channelName.text = title
+        channelName.text = "#\(title)"
     }
     
     
@@ -57,7 +57,7 @@ class ChannelCell: UITableViewCell {
 
 
 
-// ChannelCell: 
+// ChannelCell:  
 
 
 
