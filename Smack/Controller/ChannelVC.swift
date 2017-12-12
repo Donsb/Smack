@@ -48,6 +48,19 @@ class ChannelVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     
+    // Add Channel Pressed Function.
+    @IBAction func addChannelPressed(_ sender: Any) {
+        // Instantiate the addChannel
+        let addChannel = AddChannelVC()
+        
+        // Set Presentation Style
+        addChannel.modalPresentationStyle = .custom
+        
+        // Present it
+        present(addChannel, animated: true, completion: nil)
+    }
+    
+    
     // Did Receive Memory Warning Function.
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
