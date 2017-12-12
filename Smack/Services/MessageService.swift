@@ -34,18 +34,6 @@ class MessageService {
             
             if response.result.error == nil {
                 
-//                // Apple Version
-//                // Check that the response isn't empty
-//                guard let data = response.data else { return }
-//
-//                do {
-//                    // We decode to an Array because we know it's returning an Array.
-//                    self.channels = try JSONDecoder().decode([Channel].self, from: data)
-//                } catch let error {
-//                    debugPrint(error as Any)
-//                }
-//                print(self.channels[0].name)
-                
                 // SwiftyJSON version of code:
                 guard let data = response.data else { return }
                 
@@ -64,7 +52,7 @@ class MessageService {
                             // Add above channel Object to Instance Variable channels Array
                             self.channels.append(channel)
                         }
-                        print(self.channels[0].channelTitle)
+                        //print(self.channels[0].channelTitle)
                         completion(true)
                     }
                 } catch {

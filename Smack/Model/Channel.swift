@@ -14,12 +14,6 @@ struct Channel {
      Instance Variables
      */
     
-//    // Apple Version
-//    public private(set) var _id: String!
-//    public private(set) var name: String!
-//    public private(set) var description: String!
-//    public private(set) var __v: Int? // As not sure if always will have a value.
-    
     // SwiftyJSON Version
     public private(set) var channelTitle: String!
     public private(set) var description: String!
