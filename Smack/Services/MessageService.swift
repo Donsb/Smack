@@ -53,7 +53,7 @@ class MessageService {
                             // Add above channel Object to Instance Variable channels Array
                             self.channels.append(channel)
                         }
-                        //print(self.channels[0].channelTitle)
+                        NotificationCenter.default.post(name: NOTIF_CHANNELS_LOADED, object: nil)
                         completion(true)
                     }
                 } catch {

@@ -38,6 +38,7 @@ class ChannelVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         // Observer
         NotificationCenter.default.addObserver(self, selector: #selector(ChannelVC.userDataDidChange(_:)), name: NOTIF_USER_DATA_DID_CHANGE, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ChannelVC.channelsLoaded(_:)), name: NOTIF_CHANNELS_LOADED, object: nil)
         
         //Check for new Channels
         SocketService.instance.getChannel { (success) in
@@ -107,6 +108,12 @@ class ChannelVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         setupUserInfo()
         
+    }
+    
+    
+    // Channels Loaded Function.
+    @objc func channelsLoaded(_ notif: Notification) {
+        tableView.reloadData()
     }
     
     
