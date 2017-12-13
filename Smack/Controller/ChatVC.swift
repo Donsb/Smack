@@ -135,6 +135,26 @@ class ChatVC: UIViewController {
     // Send Message Pressed Function
     @IBAction func sendMessagePressed(_ sender: Any) {
         
+        // Make sure user is Logged in.
+        if AuthService.instance.isLoggedIn {
+            
+            // Get channel ID and Text from UITextField
+            guard let channelId = MessageService.instance.selectedChannel?.id else { return }
+            guard let message = messageTextBox.text else { return }
+            
+            // Call Socket Function
+            SocketService.instance.addMesage(messageBody: message, userId: UserDataService.instance.id, channelId: channelId, completion: { (success) in
+                if success {
+                    
+                    // Clear the message text box.
+                    self.messageTextBox.text = ""
+                    
+                    // Dismiss the keyboard.
+                    self.messageTextBox.resignFirstResponder()
+                }
+            })
+        }
+        
     }
     
     
