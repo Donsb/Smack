@@ -20,6 +20,7 @@ class MessageService {
      */
     
     var channels = [Channel]() // Array of Channels.
+    var messages = [Message]() // Array of Messages.
     var selectedChannel: Channel?
     
     /*
@@ -66,9 +67,71 @@ class MessageService {
         }
     }
     
+    
+    // Find All Messages For Channel Function.
+    func findAllMessagesForChannel(channelId: String, completion: @escaping CompletionHandler) {
+        
+        // Web Request
+        Alamofire.request("\(URL_GET_MESSAGES)\(channelId)", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: BEARER_HEADER).responseJSON { (response) in
+            
+            if response.result.error == nil {
+                
+                // Clear Messages in Messages Array
+                self.clearMessages()
+                
+                // Populate data variable with our response from server.
+                guard let data = response.data else { return }
+                
+                // JSON Parsing
+                do {
+                    // populate json variable with the array of JSON Objects.
+                    if let json = try JSON(data: data).array {
+                        
+                        // Extract properties from the JSON Object.
+                        for item in json {
+                            let messageBody = item["messageBody"].stringValue
+                            let channelId = item["channelId"].stringValue
+                            let id = item["_id"].stringValue
+                            let userName = item["userName"].stringValue
+                            let userAvatar = item["userAvatar"].stringValue
+                            let userAvatarColor = item["userAvatarColor"].stringValue
+                            let timeStamp = item["timeStamp"].stringValue
+                            
+                            // Create new Message struct with it's initializer.
+                            let message = Message(message: messageBody, userName: userName, channelId: channelId, userAvatar: userAvatar, userAvatarColor: userAvatarColor, id: id, timeStamp: timeStamp)
+                            
+                            // Append the new message to our messages Array.
+                            self.messages.append(message)
+                            
+                        }
+                        
+                        // Finished - Completion is now true.
+                        completion(true)
+                        
+                    }
+                } catch {
+                    debugPrint(error as Any)
+                }
+                
+            } else {
+                debugPrint(response.result.error as Any)
+                completion(false)
+            }
+            
+        } // END Web Request
+        
+    }
+    
+    
     // Function to remove channels
     func clearChannels() {
         channels.removeAll()
+    }
+    
+    
+    // Clear Messages Function.
+    func clearMessages() {
+        messages.removeAll()
     }
     
     
