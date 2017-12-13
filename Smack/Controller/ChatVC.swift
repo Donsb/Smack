@@ -36,6 +36,7 @@ class ChatVC: UIViewController {
         
         // Observer
         NotificationCenter.default.addObserver(self, selector: #selector(ChatVC.userDataDidChange(_:)), name: NOTIF_USER_DATA_DID_CHANGE, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ChatVC.channelSelected(_:)), name: NOTIF_CHANNEL_SELECTED, object: nil)
         
         // Check if logged in, if we are send out Notification User data has changed.
         if AuthService.instance.isLoggedIn {
@@ -71,6 +72,20 @@ class ChatVC: UIViewController {
             }
         }
     }
+    
+    
+    // Channel Selected Function
+    @objc func channelSelected(_ notif: Notification) {
+        updateWithChannel()
+    }
+    
+    
+    // Update With Channel Function
+    func updateWithChannel() {
+        let channelName = MessageService.instance.selectedChannel?.channelTitle ?? ""
+        channelNameLbl.text = "#\(channelName)"
+    }
+    
     
 }
 

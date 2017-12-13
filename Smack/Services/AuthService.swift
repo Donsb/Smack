@@ -35,7 +35,8 @@ class AuthService {
     // Auth Toke Variable Getter and Setter.
     var authToken: String {
         get {
-            return defaults.value(forKey: TOKEN_KEY) as! String // Cast as String because defaults value is an Optional any.
+            // Cast as String because defaults value is an Optional any.
+            return defaults.value(forKey: TOKEN_KEY) as? String ?? ""
         }
         set {
             defaults.set(newValue, forKey: TOKEN_KEY)
@@ -46,7 +47,7 @@ class AuthService {
     // User Email Variable Getter and Setter.
     var userEmail: String {
         get {
-            return defaults.value(forKey: USER_EMAIL) as! String
+            return defaults.value(forKey: USER_EMAIL) as? String ?? ""
         }
         set {
             defaults.set(newValue, forKey: USER_EMAIL)
