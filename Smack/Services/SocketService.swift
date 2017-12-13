@@ -72,6 +72,18 @@ class SocketService: NSObject {
     }
     
     
+    //  Add Messages Function -> Add Messages to API.
+    func addMesage(messageBody: String, userId: String, channelId: String, completion: @escaping CompletionHandler) {
+        
+        // So I don't have to write UserDataService.instance lots of times.
+        let user = UserDataService.instance
+        
+        // Socket
+        manager.defaultSocket.emit("newMessage", messageBody, userId, channelId, user.name, user.avatarName, user.avatarColor)
+        completion(true)
+        
+    }
+    
     
 }
 

@@ -16,6 +16,7 @@ class ChatVC: UIViewController {
     
     @IBOutlet weak var menuBtn: UIButton!
     @IBOutlet weak var channelNameLbl: UILabel!
+    @IBOutlet weak var messageTextBox: UITextField!
     
     /*
      Functions
@@ -25,6 +26,16 @@ class ChatVC: UIViewController {
     // View Did Load Function.
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Bind our View to the bottom of the keyboard.
+        view.bindToKeyboard()
+        
+        // Ability to dismiss the keyboard by tapping outside it.
+        let tap = UITapGestureRecognizer(target: self, action: #selector(ChatVC.handleTap))
+        
+        // Add that above ability to our view.
+        view.addGestureRecognizer(tap)
+        
         // Click on button and slides the ChatVC to the right-> revealing the channelVC behind it.
         menuBtn.addTarget(self.revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:)), for: .touchUpInside)
         
@@ -102,6 +113,11 @@ class ChatVC: UIViewController {
     }
     
     
+    // Handle Tap Function.
+    @objc func handleTap() {
+        view.endEditing(true)
+    }
+    
     // Get Messages Function
     func getMessages() {
         
@@ -112,6 +128,12 @@ class ChatVC: UIViewController {
         MessageService.instance.findAllMessagesForChannel(channelId: channelId) { (success) in
             
         }
+        
+    }
+    
+    
+    // Send Message Pressed Function
+    @IBAction func sendMessagePressed(_ sender: Any) {
         
     }
     
