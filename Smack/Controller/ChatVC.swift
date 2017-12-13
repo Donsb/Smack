@@ -35,6 +35,11 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         tableView.delegate = self
         tableView.dataSource = self
         
+        //  Set estimated table row height, so we can change it based on message size.
+        tableView.estimatedRowHeight = 80
+        // Add automatic dimension which does the resizing.
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
         // Ability to dismiss the keyboard by tapping outside it.
         let tap = UITapGestureRecognizer(target: self, action: #selector(ChatVC.handleTap))
         
