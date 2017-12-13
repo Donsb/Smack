@@ -47,6 +47,17 @@ class AddChannelVC: UIViewController {
     // Create Channel Pressed Function.
     @IBAction func createChannelPressed(_ sender: Any) {
         
+        // Set our variables to send to server.
+        guard let channelName = nameTxt.text , nameTxt.text != "" else { return }
+        guard let channelDesc = chanDesc.text else { return }
+        
+        // Call the function to send new channel to Server.
+        SocketService.instance.addChannel(channelName: channelName, channelDescription: channelDesc) { (success) in
+            if success {
+                // Dismiss the popup once created.
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
     }
     
     
