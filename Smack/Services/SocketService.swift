@@ -115,6 +115,20 @@ class SocketService: NSObject {
     }
     
     
+    // Get Typing Users Function.
+    func getTypingUsers(_ completionHandler: @escaping (_ typingUsers: [String : String])-> Void) {
+        manager.defaultSocket.on("userTypingUpdate") { (dataArray, ack) in
+            
+            // Get the Array of Dictionary Strings (username & ChannelId)
+            guard let typingUsers = dataArray[0] as? [String : String] else { return }
+            
+            // Pass into completionHandler the Dictionary of typingUsers.
+            completionHandler(typingUsers)
+            
+        }
+    }
+    
+    
 }
 
 

@@ -19,6 +19,7 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var messageTextBox: UITextField!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var sendBtn: UIButton!
+    @IBOutlet weak var typingUsersLbl: UILabel!
     
     /*
      Instance Variables
@@ -83,6 +84,48 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 }
             }
         }
+        
+        // Get Typing Users Socket Service call.
+        SocketService.instance.getTypingUsers { (typingUsers) in
+            
+            // We have a Dictionary of users.  We need to know if they are in the right channel
+            guard let channelId = MessageService.instance.selectedChannel?.id else { return }
+            
+            // Variable for who is typing
+            var names = ""
+            
+            // var for how many people are typing
+            var numberOfTypers = 0
+            
+            // Loop through Dictionary
+            for (typingUser, channel) in typingUsers {
+                
+                // Make sure its not us typing as we don't want to display ourselves.
+                if typingUser != UserDataService.instance.name && channel == channelId {
+                    
+                    // If it's the first time someone is added to it:
+                    if names == "" {
+                        names = typingUser
+                    } else {
+                        // if already has a name, add the next
+                        names = "\(names), \(typingUser)"
+                    }
+                    numberOfTypers += 1
+                }
+            }
+            
+            // Build vocabulary to display our sentence properly
+            if numberOfTypers > 0 && AuthService.instance.isLoggedIn == true {
+                var verb = "is"
+                if numberOfTypers > 1 {
+                    verb = "are"
+                }
+                self.typingUsersLbl.text = "\(names) \(verb) typing a message"
+            } else {
+                // If no items in Dictionary, set label to empty string.
+                self.typingUsersLbl.text = ""
+            }
+        } // END Users Typing Socket Call.
         
         // Check if logged in, if we are send out Notification User data has changed.
         if AuthService.instance.isLoggedIn {
@@ -177,13 +220,22 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // Text Editing Function
     @IBAction func editing(_ sender: Any) {
         
+        // Get Channel ID for Socket
+        guard let channelId = MessageService.instance.selectedChannel?.id else { return }
+        
         // show send button while typing.
         if messageTextBox.text == "" {
             isTyping = false
             sendBtn.isHidden = true
+            
+            // When not typing
+            SocketService.instance.manager.defaultSocket.emit("stopType", UserDataService.instance.name, channelId)
         } else {
             if isTyping == false {
                 sendBtn.isHidden = false
+                
+                // When typing
+                SocketService.instance.manager.defaultSocket.emit("startType", UserDataService.instance.name, channelId)
             }
             isTyping = true
         }
@@ -207,12 +259,14 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                     // Clear the message text box.
                     self.messageTextBox.text = ""
                     
+                    // When not typing
+                    SocketService.instance.manager.defaultSocket.emit("stopType", UserDataService.instance.name, channelId)
+                    
                     // Dismiss the keyboard.
                     self.messageTextBox.resignFirstResponder()
                 }
             })
         }
-        
     }
     
     
