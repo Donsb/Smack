@@ -18,6 +18,13 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var channelNameLbl: UILabel!
     @IBOutlet weak var messageTextBox: UITextField!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var sendBtn: UIButton!
+    
+    /*
+     Instance Variables
+     */
+    
+    var isTyping = false
     
     /*
      Functions
@@ -39,6 +46,9 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         tableView.estimatedRowHeight = 80
         // Add automatic dimension which does the resizing.
         tableView.rowHeight = UITableViewAutomaticDimension
+        
+        // Hide Send Button by default
+        sendBtn.isHidden = true
         
         // Ability to dismiss the keyboard by tapping outside it.
         let tap = UITapGestureRecognizer(target: self, action: #selector(ChatVC.handleTap))
@@ -96,6 +106,8 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             onLoginGetMessages()
         } else {
             channelNameLbl.text = "Please Log In"
+            // Clear TableView of Chat Messages is logged out.
+            tableView.reloadData()
         }
     }
     
@@ -159,6 +171,22 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             
         }
         
+    }
+    
+    
+    // Text Editing Function
+    @IBAction func editing(_ sender: Any) {
+        
+        // show send button while typing.
+        if messageTextBox.text == "" {
+            isTyping = false
+            sendBtn.isHidden = true
+        } else {
+            if isTyping == false {
+                sendBtn.isHidden = false
+            }
+            isTyping = true
+        }
     }
     
     
