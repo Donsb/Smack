@@ -59,6 +59,21 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         NotificationCenter.default.addObserver(self, selector: #selector(ChatVC.userDataDidChange(_:)), name: NOTIF_USER_DATA_DID_CHANGE, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ChatVC.channelSelected(_:)), name: NOTIF_CHANNEL_SELECTED, object: nil)
         
+        // Listen for new message and refresh our screen.
+        SocketService.instance.getChatMessage { (success) in
+            if success {
+                self.tableView.reloadData()
+                if MessageService.instance.messages.count > 0 {
+                    
+                    // Create variable to the last message in our message array.
+                    let endInex = IndexPath.init(row: MessageService.instance.messages.count - 1, section: 0)
+                    
+                    // Set the TableView's position to that final spot
+                    self.tableView.scrollToRow(at: endInex, at: .bottom, animated: false)
+                }
+            }
+        }
+        
         // Check if logged in, if we are send out Notification User data has changed.
         if AuthService.instance.isLoggedIn {
             AuthService.instance.findUserByEmail(completion: { (success) in
