@@ -54,14 +54,20 @@ class ChannelVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // Add Channel Pressed Function.
     @IBAction func addChannelPressed(_ sender: Any) {
-        // Instantiate the addChannel
-        let addChannel = AddChannelVC()
         
-        // Set Presentation Style
-        addChannel.modalPresentationStyle = .custom
+        // Only can add a channel if logged in.
+        if AuthService.instance.isLoggedIn {
+            
+            // Instantiate the addChannel
+            let addChannel = AddChannelVC()
+            
+            // Set Presentation Style
+            addChannel.modalPresentationStyle = .custom
+            
+            // Present it
+            present(addChannel, animated: true, completion: nil)
+        }
         
-        // Present it
-        present(addChannel, animated: true, completion: nil)
     }
     
     
@@ -114,6 +120,7 @@ class ChannelVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             loginBtn.setTitle("Login", for: .normal) // Set title back to Login
             userImage.image = UIImage(named: "menuProfileIcon") // Set image back to menuProfileIcon
             userImage.backgroundColor = UIColor.clear // Set background colour to clear.
+            tableView.reloadData()
         }
     }
     
@@ -147,6 +154,7 @@ class ChannelVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     
+
     
     
 }

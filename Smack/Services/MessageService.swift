@@ -20,6 +20,7 @@ class MessageService {
      */
     
     var channels = [Channel]() // Array of Channels.
+    var selectedChannel: Channel?
     
     /*
      Functions
@@ -63,6 +64,11 @@ class MessageService {
                 debugPrint(response.result.error as Any)
             }
         }
+    }
+    
+    // Function to remove channels
+    func clearChannels() {
+        channels.removeAll()
     }
     
     
