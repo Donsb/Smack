@@ -32,11 +32,14 @@ class MessageCell: UITableViewCell {
     }
     
     
-    // Set Selected Function
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    // Configure Cell
+        //-> Set up the IB Outlets.
+    func configureCell(message: Message) {
+        messageBodyLbl.text = message.message
+        userNameLbl.text = message.userName
+        userImg.image = UIImage(named: message.userAvatar)
+        userImg.backgroundColor = UserDataService.instance.returnUIColor(components: message.userAvatarColor)
+        // Time Label- will code in next lesson.
     }
     
     

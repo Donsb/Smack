@@ -184,6 +184,7 @@
                         <outlet property="channelNameLbl" destination="JrD-Uc-xCi" id="Xl8-Fh-xdd"/>
                         <outlet property="menuBtn" destination="TdJ-oN-WGg" id="ksE-zu-ZH1"/>
                         <outlet property="messageTextBox" destination="Q5P-pu-r1E" id="jpG-7k-fHA"/>
+                        <outlet property="tableView" destination="iBa-pB-vMQ" id="Fri-jZ-XHM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8bA-oK-uDb" userLabel="First Responder" sceneMemberID="firstResponder"/>

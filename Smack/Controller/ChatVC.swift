@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChatVC: UIViewController {
+class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     /*
      IBOutlets
@@ -17,6 +17,7 @@ class ChatVC: UIViewController {
     @IBOutlet weak var menuBtn: UIButton!
     @IBOutlet weak var channelNameLbl: UILabel!
     @IBOutlet weak var messageTextBox: UITextField!
+    @IBOutlet weak var tableView: UITableView!
     
     /*
      Functions
@@ -29,6 +30,10 @@ class ChatVC: UIViewController {
         
         // Bind our View to the bottom of the keyboard.
         view.bindToKeyboard()
+        
+        // Set Delegate and DataSource to self.
+        tableView.delegate = self
+        tableView.dataSource = self
         
         // Ability to dismiss the keyboard by tapping outside it.
         let tap = UITapGestureRecognizer(target: self, action: #selector(ChatVC.handleTap))
@@ -127,6 +132,11 @@ class ChatVC: UIViewController {
         //Get Messages from Messages MessagesService
         MessageService.instance.findAllMessagesForChannel(channelId: channelId) { (success) in
             
+            if success {
+                // If there are new messages, reload data.
+                self.tableView.reloadData()
+            }
+            
         }
         
     }
@@ -155,6 +165,31 @@ class ChatVC: UIViewController {
             })
         }
         
+    }
+    
+    
+    // Cell For Row At Function.
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "messageCell", for: indexPath) as? MessageCell {
+            
+            let message = MessageService.instance.messages[indexPath.row]
+            cell.configureCell(message: message)
+            return cell
+        } else {
+            return UITableViewCell()
+        }
+    }
+    
+    
+    // Number of Sections Function.
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    
+    // Number of Rows in Section Function.
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return MessageService.instance.messages.count
     }
     
     
