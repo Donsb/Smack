@@ -48,6 +48,16 @@ class ChannelCell: UITableViewCell {
         
         // Set our Label to the channelTitle.
         channelName.text = "#\(title)"
+        
+        // Set the default font for Channel Name.
+        channelName.font = UIFont(name: "Avenir-Medium", size: 17)
+        
+        // If unreadChannels has items, make them bold and larger
+        for id in MessageService.instance.unreadChannels {
+            if id == channel.id {
+                channelName.font = UIFont(name: "Avenir-Heavy", size: 22)
+            }
+        }
     }
     
     

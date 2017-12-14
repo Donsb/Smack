@@ -71,19 +71,32 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         NotificationCenter.default.addObserver(self, selector: #selector(ChatVC.channelSelected(_:)), name: NOTIF_CHANNEL_SELECTED, object: nil)
         
         // Listen for new message and refresh our screen.
-        SocketService.instance.getChatMessage { (success) in
-            if success {
+        SocketService.instance.getChatMessage { (newMessage) in
+            if newMessage.channelId == MessageService.instance.selectedChannel?.id && AuthService.instance.isLoggedIn {
+                MessageService.instance.messages.append(newMessage)
                 self.tableView.reloadData()
+                
+                // Start at bottom by default
                 if MessageService.instance.messages.count > 0 {
-                    
-                    // Create variable to the last message in our message array.
-                    let endInex = IndexPath.init(row: MessageService.instance.messages.count - 1, section: 0)
-                    
-                    // Set the TableView's position to that final spot
-                    self.tableView.scrollToRow(at: endInex, at: .bottom, animated: false)
+                    let endIndex = IndexPath(row: MessageService.instance.messages.count - 1, section: 0)
+                    self.tableView.scrollToRow(at: endIndex, at: .bottom, animated: false)
                 }
             }
         }
+        
+//        SocketService.instance.getChatMessage { (success) in
+//            if success {
+//                self.tableView.reloadData()
+//                if MessageService.instance.messages.count > 0 {
+//
+//                    // Create variable to the last message in our message array.
+//                    let endInex = IndexPath.init(row: MessageService.instance.messages.count - 1, section: 0)
+//
+//                    // Set the TableView's position to that final spot
+//                    self.tableView.scrollToRow(at: endInex, at: .bottom, animated: false)
+//                }
+//            }
+//        }
         
         // Get Typing Users Socket Service call.
         SocketService.instance.getTypingUsers { (typingUsers) in

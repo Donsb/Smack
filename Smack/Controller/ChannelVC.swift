@@ -44,6 +44,17 @@ class ChannelVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         SocketService.instance.getChannel { (success) in
             self.tableView.reloadData()
         }
+        
+        // Listner for new Messages
+        SocketService.instance.getChatMessage { (newMessage) in
+            
+            if newMessage.channelId != MessageService.instance.selectedChannel?.id && AuthService.instance.isLoggedIn {
+                MessageService.instance.unreadChannels.append(newMessage.channelId)
+                self.tableView.reloadData()
+            }
+            
+        }
+        
     }
     
     
@@ -176,7 +187,6 @@ class ChannelVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 }
 
 // ChannelVC:  
-
 
 
 
