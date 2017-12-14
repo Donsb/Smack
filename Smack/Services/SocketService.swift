@@ -8,6 +8,7 @@
 
 import UIKit
 import SocketIO
+import Starscream
 
 class SocketService: NSObject {
     
@@ -24,7 +25,8 @@ class SocketService: NSObject {
     }
     
     // Create Socket
-    var manager: SocketManager = SocketManager(socketURL: URL(string: BASE_URL)!, config: [.log(true), .compress])
+    //let manager: SocketManager = SocketManager(socketURL: URL(string: BASE_URL)!, config: [.log(true), .compress])
+    let manager: SocketManager = SocketManager(socketURL: URL(string: BASE_URL)!) // This one works better.
     
     /*
      Functions

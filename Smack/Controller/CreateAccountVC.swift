@@ -107,12 +107,6 @@ class CreateAccountVC: UIViewController {
     } // END Create Account Btn Pressed Function.
     
     
-    // Log In User Function.
-    func loginUser() {
-        
-    }
-    
-    
     // Pick Avatar Btn Pressed Function
     @IBAction func pickAvatarPressed(_ sender: Any) {
         performSegue(withIdentifier: TO_AVATAR_PICKER, sender: nil)
@@ -152,8 +146,6 @@ class CreateAccountVC: UIViewController {
         view.endEditing(true) // Causes the view to dismiss the keyboard.
     }
     
-    
-    // Reusable Notification
     
 }
 

@@ -162,13 +162,13 @@ class ChannelVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // Number Of Sections
     func numberOfSections(in tableView: UITableView) -> Int {
-        return MessageService.instance.channels.count
+        return 1
     }
     
     
     // Number Of Rows In Section Function
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return MessageService.instance.channels.count
     }
     
     
