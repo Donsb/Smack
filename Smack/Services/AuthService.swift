@@ -160,7 +160,7 @@ class AuthService {
                 
             }
         }
-    }
+    } // END Create User.
     
     
     // Find User By Email Function.
@@ -180,7 +180,7 @@ class AuthService {
                 debugPrint(response.result.error as Any)
             }
         }
-    }
+    } // End find user by email.
     
     
     // Set User Info Funcion
@@ -199,36 +199,8 @@ class AuthService {
             print("Error in Set User Info Function")
             debugPrint(error as Any)
         }
-    }
+    } // End set User Info
     
     
 } // END Class.
-
-
-
-
-
-// AuthService: 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

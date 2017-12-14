@@ -17,11 +17,13 @@ class AvatarPickerVC: UIViewController, UICollectionViewDelegate, UICollectionVi
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var segmentControl: UISegmentedControl!
     
+    
     /*
      Instance Variables
      */
     
     var avatarType = AvatarType.dark // default dark.
+    
     
     /*
      Functions
@@ -33,53 +35,64 @@ class AvatarPickerVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         super.viewDidLoad()
         collectionView.delegate = self
         collectionView.dataSource = self
-    }
+    } // End View Did Load.
     
     
     // Did Receive Memory Warning Function.
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
+    } // End Did Receive Memory Warning.
     
     
     // Back Btn Pressed Function.
     @IBAction func backPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
-    }
+    } // End Back Pressed.
     
     
     // Segment Control Changed Function.
     @IBAction func segmentControlChanged(_ sender: Any) {
+        
         if segmentControl.selectedSegmentIndex == 0 {
             avatarType = .dark
+            
         } else {
+            
             avatarType = .light
+            
         }
+        
         collectionView.reloadData() // This updates our CollectionView Functions.
-    }
+        
+    } // End Segment Control Changed.
     
     
     // Cell For Item At Function
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "avatarCell", for: indexPath) as? AvatarCell {
+            
             cell.configureCell(index: indexPath.item, type: avatarType)
             return cell
+            
         }
+        
         return AvatarCell()
-    }
+        
+    } // End Cell For Item At.
     
     
     // Number Of Sections Function
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
-    }
+    } // End Number Of Sections.
     
     
     // Number Of Items in Section Function
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 28 // We have 28 items in Assets (28 Dark and 28 Light)
-    }
+    } // End number Of Items In Section.
     
     
     // Collection View Layout Function
@@ -95,30 +108,34 @@ class AvatarPickerVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         let spaceBetweenCells: CGFloat = 10
         let padding: CGFloat = 40
-        // Take entire width subtract padding of both sides.  Then Subtract Gap bewteen cells.
-        // Take the remaining which the the width of the cells and divide by number of columns.
+        
+        /*
+         Take entire width subtract padding of both sides.  Then Subtract Gap bewteen cells.
+         Take the remaining which the the width of the cells and divide by number of columns.
+         */
         let cellDimension = ((collectionView.bounds.width - padding) - (numberOfColumns - 1) * spaceBetweenCells) / numberOfColumns
         
         return CGSize(width: cellDimension, height: cellDimension)
-    }
+        
+    } // End Collection View Layout-> Size Cells.
     
     
     // Select an Avatar
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         if avatarType == .dark {
             UserDataService.instance.setAvatarName(avatarName: "dark\(indexPath.item)")
         } else {
             UserDataService.instance.setAvatarName(avatarName: "light\(indexPath.item)")
         }
+        
         // Dismiss the screen.
         self.dismiss(animated: true, completion: nil)
-    }
+        
+    } // End Collection View Layout-> Select Avatar.
     
     
 } // END Class
 
-
-
-// AvatarPickerVC:  
 
 

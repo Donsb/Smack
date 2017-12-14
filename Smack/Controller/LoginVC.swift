@@ -28,26 +28,26 @@ class LoginVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
-    }
+    } // End View Did Load.
     
     
     // Did Receive Memory Warning Function.
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
+    } // End Did Receive Memory Warning.
     
     
     // Close Pressed IB Action Function
     @IBAction func closePressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
-    }
+    } // End Close Pressed.
     
     
     // Create Account IB Action Function.
     @IBAction func createAccountBtnPressed(_ sender: Any) {
         performSegue(withIdentifier: TO_CREATE_ACCOUNT, sender: nil)
-    }
+    } // End Create Account Button Pressed.
     
     
     @IBAction func loginPressed(_ sender: Any) {
@@ -79,14 +79,17 @@ class LoginVC: UIViewController {
                         self.dismiss(animated: true, completion: nil)
                         
                     }
+                    
                 })
+                
             }
+            
         }
         
-    }
+    } // End Login Pressed.
     
     
-    //
+    // Set Up View Function.
     func setUpView() {
         
         // Hide Spinner to begin.
@@ -96,28 +99,10 @@ class LoginVC: UIViewController {
         userName.attributedPlaceholder = NSAttributedString(string: "username", attributes: [NSAttributedStringKey.foregroundColor: SMACK_PURPLE_PLACEHOLDER])
         passwordTxt.attributedPlaceholder = NSAttributedString(string: "password", attributes: [NSAttributedStringKey.foregroundColor: SMACK_PURPLE_PLACEHOLDER])
         
-    }
+    } // End Set Up View.
     
     
 } // END class
-
-
-
-// LoginVC:  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

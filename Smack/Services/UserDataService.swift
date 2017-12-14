@@ -37,13 +37,13 @@ class UserDataService {
         self.avatarName = avatarName
         self.email = email
         self.name = name
-    }
+    } // End Set User Data.
     
     
     // Update Avatar Name Function.
     func setAvatarName(avatarName: String) {
         self.avatarName = avatarName
-    }
+    } // End Set Avatar Name.
     
     
     // Return UI Color Function
@@ -85,7 +85,7 @@ class UserDataService {
         
         // Return our UIColor.
         return newUIColor
-    }
+    } // End Return UI Color
     
     
     // User Logout Function.
@@ -103,32 +103,8 @@ class UserDataService {
         AuthService.instance.authToken = ""
         MessageService.instance.clearChannels()
         MessageService.instance.clearMessages()
-    }
+    } // End User Logout.
     
 } // END Class
-
-
-
-
-
-// UserDataService:  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

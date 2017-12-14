@@ -28,6 +28,7 @@ class CreateAccountVC: UIViewController {
     var avatarColor = "[0.5, 0.5, 0.5, 1]" // String Array of the RGB aplha properties colour.
     var bgColor: UIColor? // Optional UIColor for Avatar color
     
+    
     /*
      Functions
      */
@@ -37,7 +38,7 @@ class CreateAccountVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
-    }
+    } // End View Did Load.
     
     
     // View Did Appear Function.  Updates Avatar once selected.
@@ -53,21 +54,23 @@ class CreateAccountVC: UIViewController {
             if avatarName.contains("light") && bgColor == nil {
                 userImg.backgroundColor = UIColor.lightGray
             }
+            
         }
-    }
+        
+    } // End View Did Appear.
     
     
     // Did Receive Memory Warning Function.
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
+    } // End Did Receive Memory Warning.
     
     
     // Close Pressed Action Function.
     @IBAction func closePressed(_ sender: Any) {
         performSegue(withIdentifier: UNWIND, sender: nil)
-    }
+    } // End Close Pressed.
     
     
     // Create Account Btn Pressed Function
@@ -87,7 +90,7 @@ class CreateAccountVC: UIViewController {
         // Grab Password text.
         guard let pass = passwordTxt.text , passwordTxt.text != "" else {return}
         
-     // Call register Function from AuthService.  Pass it email and pass.
+        // Call register Function from AuthService.  Pass it email and pass.
         AuthService.instance.registerUser(email: email, password: pass) { (success) in
             if success {
                 AuthService.instance.loginUser(email: email, password: pass, completion: { (success) in
@@ -99,22 +102,29 @@ class CreateAccountVC: UIViewController {
                                 self.performSegue(withIdentifier: UNWIND, sender: nil)
                                 NotificationCenter.default.post(name: NOTIF_USER_DATA_DID_CHANGE, object: nil) // Posts to all classes
                             }
+                            
                         })
+                        
                     }
+                    
                 })
+                
             }
+            
         }
-    } // END Create Account Btn Pressed Function.
+        
+    } // END Create Account Pressed.
     
     
     // Pick Avatar Btn Pressed Function
     @IBAction func pickAvatarPressed(_ sender: Any) {
         performSegue(withIdentifier: TO_AVATAR_PICKER, sender: nil)
-    }
+    } // End Pick Avatar Pressed.
     
     
     // Pick Background Colour Btn Pressed Function.
     @IBAction func pickBGColourPressed(_ sender: Any) {
+        
         // Randomly Generated Numbers for the R-G-B
         let r = CGFloat(arc4random_uniform(255)) / 255 // 1-255 divided by 255
         let g = CGFloat(arc4random_uniform(255)) / 255
@@ -123,10 +133,12 @@ class CreateAccountVC: UIViewController {
         // Set bcColor
         bgColor = UIColor(red: r, green: g, blue: b, alpha: 1) // 1 alpha, not transparent.
         avatarColor = "[\(r), \(g), \(b), 1]" // Set avatarColor to our chosen bg colour.
+        
         UIView.animate(withDuration: 0.2) {
             self.userImg.backgroundColor = self.bgColor
         }
-    }
+        
+    } // End Pick BG Color Pressed.
     
     
     // Set Up View
@@ -137,21 +149,17 @@ class CreateAccountVC: UIViewController {
         passwordTxt.attributedPlaceholder = NSAttributedString(string: "password", attributes: [NSAttributedStringKey.foregroundColor: SMACK_PURPLE_PLACEHOLDER])
         let tap = UITapGestureRecognizer(target: self, action: #selector(CreateAccountVC.handleTap))
         view.addGestureRecognizer(tap) // add to our view.
-    }
+    } // End Set Up View.
     
     
     // Handle Tap Function
         // -> This will clear away keyboard if they click outside the keyboard.
     @objc func handleTap() {
         view.endEditing(true) // Causes the view to dismiss the keyboard.
-    }
+    } // End Handle Tap.
     
     
-}
-
-// CreateAccountVC:  
-
-
+} // End Class.
 
 
 

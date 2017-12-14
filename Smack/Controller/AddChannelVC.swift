@@ -28,20 +28,20 @@ class AddChannelVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
-    }
+    } // End View Did Load.
     
     
     // Did Receive Memory Warning Function
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
+    } // End Did Receive Memory Warning.
     
     
     // Close Model Pressed Function.
     @IBAction func closeModelPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
-    }
+    } // End Close Model Pressed.
     
     
     // Create Channel Pressed Function.
@@ -53,12 +53,15 @@ class AddChannelVC: UIViewController {
         
         // Call the function to send new channel to Server.
         SocketService.instance.addChannel(channelName: channelName, channelDescription: channelDesc) { (success) in
+            
             if success {
                 // Dismiss the popup once created.
                 self.dismiss(animated: true, completion: nil)
             }
+            
         }
-    }
+        
+    } // End Create Channel Pressed.
     
     
     // Set Up View Function.
@@ -77,34 +80,17 @@ class AddChannelVC: UIViewController {
         // Set colour and placeholder for description text field
         chanDesc.attributedPlaceholder = NSAttributedString(string: "description", attributes: [NSAttributedStringKey.foregroundColor: SMACK_PURPLE_PLACEHOLDER])
         
-    }
+    } // End Set Up View.
     
     
     // Close Tap Function
         //-> Tap and it closes the pop up.
     @objc func closeTap(_ recognizer: UITapGestureRecognizer) {
         dismiss(animated: true, completion: nil)
-    }
+    } // End Close Tap.
     
-}
-
-
-// AddChannelVC:  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
+} // End Class.
 
 
 

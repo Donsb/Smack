@@ -16,6 +16,7 @@ class ChannelCell: UITableViewCell {
     
     @IBOutlet weak var channelName: UILabel!
     
+    
     /*
      Functions
      */
@@ -25,7 +26,7 @@ class ChannelCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-    }
+    } // End Awake From Nib.
     
     
     // Set Selected Function.
@@ -38,7 +39,7 @@ class ChannelCell: UITableViewCell {
         } else {
             self.layer.backgroundColor = UIColor.clear.cgColor
         }
-    }
+    } // End Set Selected.
     
     
     // Configure Cell Function
@@ -58,26 +59,9 @@ class ChannelCell: UITableViewCell {
                 channelName.font = UIFont(name: "Avenir-Heavy", size: 22)
             }
         }
-    }
+    } // End Configure Cell.
     
     
 } // END Class
-
-
-
-
-
-// ChannelCell:  
-
-
-
-
-
-
-
-
-
-
-
 
 

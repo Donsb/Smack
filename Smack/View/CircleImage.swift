@@ -9,6 +9,7 @@
 import UIKit
 
 @IBDesignable
+
 class CircleImage: UIImageView {
     
     /*
@@ -19,23 +20,22 @@ class CircleImage: UIImageView {
     // Awake From Nib Function.
     override func awakeFromNib() {
         setUpView()
-    }
+    } // End Awake From Nib.
     
     
     // Set Up View Function.
     func setUpView() {
         self.layer.cornerRadius = self.frame.width / 2
         self.clipsToBounds = true
-    }
+    } // End Set Up View.
     
     
     // Prepare For Interface Builder Function.
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
         setUpView()
-    }
+    } // End Prepare For Interface Builder.
     
 } // END Class.
 
 
-// CircleImage:  

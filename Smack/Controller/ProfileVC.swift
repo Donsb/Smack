@@ -25,25 +25,24 @@ class ProfileVC: UIViewController {
      */
     
     
-    
     // View Did Load Function
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
-    }
+    } // End View Did Load.
     
     
     // Did Receive Memory Warning Function
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
+    } // End Did Receive Memory Warning.
     
     
     // Close Button Pressed Function.
     @IBAction func closeModelPressed(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
-    }
+    } // End Close Model Pressed.
     
     
     // Logout Btn Pressed Function.
@@ -58,12 +57,13 @@ class ProfileVC: UIViewController {
         // Dissmiss the View.
         dismiss(animated: true, completion: nil)
         
-    }
+    } // End Logout Pressed.
     
     
     // Set Up View Function.
         //-> Set username / user emai / Profile image / Profile image colour.
     func setUpView() {
+        
         userName.text = UserDataService.instance.name  // Set uerName
         userEmail.text = UserDataService.instance.email // set user email
         profileImage.image = UIImage(named: UserDataService.instance.avatarName) // set user profile avatar
@@ -74,19 +74,18 @@ class ProfileVC: UIViewController {
         
         // Add closeTouch to our bgView
         bgView.addGestureRecognizer(closeTouch)
-    }
+        
+    } // End Set Up View.
     
     
     
     // Close with Tap Function
     @objc func closeTap(_ recognizer: UITapGestureRecognizer) {
         dismiss(animated: true, completion: nil)
-    }
+    } // End Close Tap.
     
     
 } // END class.
 
 
-
-// ProfileVC:  
 

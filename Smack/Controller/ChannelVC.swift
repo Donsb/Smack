@@ -19,6 +19,7 @@ class ChannelVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var userImage: CircleImage!
     @IBOutlet weak var tableView: UITableView!
     
+    
     /*
      Functions
      */
@@ -55,13 +56,13 @@ class ChannelVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             
         }
         
-    }
+    } // End View Did Load.
     
     
     // View Did Appear.
     override func viewDidAppear(_ animated: Bool) {
         setupUserInfo()
-    }
+    } // End View Did Appear.
     
     
     // Add Channel Pressed Function.
@@ -80,14 +81,14 @@ class ChannelVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             present(addChannel, animated: true, completion: nil)
         }
         
-    }
+    } // End Add Channel Pressed.
     
     
     // Did Receive Memory Warning Function.
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
+    } // End Did Receive Memory Warning.
     
     
     // Login Button Pressed Function.
@@ -111,25 +112,24 @@ class ChannelVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             
         }
         
-    }
+    } // End Login Button Pressed.
     
     
     // User Data Did Change Function.
     @objc func userDataDidChange(_ notif: Notification) {
-        
         setupUserInfo()
-        
-    }
+    } // End User Data Did Change.
     
     
     // Channels Loaded Function.
     @objc func channelsLoaded(_ notif: Notification) {
         tableView.reloadData()
-    }
+    } // End Channels Loaded.
     
     
     // Setup User Info Function
     func setupUserInfo() {
+        
         if AuthService.instance.isLoggedIn {
             loginBtn.setTitle(UserDataService.instance.name, for: .normal) // Change login to be userName.
             userImage.image = UIImage(named: UserDataService.instance.avatarName) // Change image to Avatar
@@ -140,11 +140,13 @@ class ChannelVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             userImage.backgroundColor = UIColor.clear // Set background colour to clear.
             tableView.reloadData()
         }
-    }
+        
+    } // End Set Up User Info.
     
     
     // Cell For Row At Function.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         if let cell = tableView.dequeueReusableCell(withIdentifier: "channelCell", for: indexPath) as? ChannelCell {
             
             // Variable to pass into our TableViewCell.
@@ -157,19 +159,20 @@ class ChannelVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         } else {
             return UITableViewCell()
         }
-    }
+        
+    } // End Cell For Row At.
     
     
     // Number Of Sections
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
-    }
+    } // End Number Of Sections.
     
     
     // Number Of Rows In Section Function
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return MessageService.instance.channels.count
-    }
+    } // End Number Of Rows In Section.
     
     
     // Did Select Row At Function
@@ -197,23 +200,10 @@ class ChannelVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         // Make menu slide back in palce
         self.revealViewController().revealToggle(true)
-    }
+        
+    } // End Did Select Row At.
 
-    
     
 } // END Class.
-
-// ChannelVC:  
-
-
-
-
-
-
-
-
-
-
-
 
 

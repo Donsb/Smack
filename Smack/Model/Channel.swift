@@ -19,24 +19,6 @@ struct Channel {
     public private(set) var description: String!
     public private(set) var id: String!
     
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Channel:  
-
-
-
+} // End Struct.
 
 

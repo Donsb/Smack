@@ -66,7 +66,7 @@ class MessageService {
                 debugPrint(response.result.error as Any)
             }
         }
-    }
+    } // End Find All Channels.
     
     
     // Find All Messages For Channel Function.
@@ -121,43 +121,20 @@ class MessageService {
             
         } // END Web Request
         
-    }
+    } // End Find All Messages For Channel
     
     
     // Function to remove channels
     func clearChannels() {
         channels.removeAll()
-    }
+    } // End Clear Channels
     
     
     // Clear Messages Function.
     func clearMessages() {
         messages.removeAll()
-    }
+    } // End Clear Messages.
     
     
 } // END class
-
-
-
-
-
-
-// MessageService:  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

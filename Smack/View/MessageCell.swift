@@ -28,8 +28,7 @@ class MessageCell: UITableViewCell {
     // Awake From Nib Function.
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-    }
+    } // End Awake From Nib.
     
     
     // Configure Cell
@@ -39,32 +38,35 @@ class MessageCell: UITableViewCell {
         userNameLbl.text = message.userName
         userImg.image = UIImage(named: message.userAvatar)
         userImg.backgroundColor = UserDataService.instance.returnUIColor(components: message.userAvatarColor)
-        // Time Label- will code in next lesson.
-    }
+        
+        // ISO-8601 Format is what we get back for date stamp.
+            // 2017-07-13T21:49:25.590z
+        
+        guard var isoDate = message.timeStamp else { return }
+        
+        // Start at the end and backtrack by 5
+        let end = isoDate.index(isoDate.endIndex, offsetBy: -5)
+        
+        isoDate = isoDate.substring(to: end)
+        
+        let isoFormatter = ISO8601DateFormatter()
+        
+        // We now have an ISO fotmat without the milliseconds
+        let chatDate = isoFormatter.date(from: isoDate.appending("Z"))
+        
+        let newFormtter = DateFormatter()
+        
+        // Tnhis sets a readable date pof M/D H:M and am/pm
+        newFormtter.dateFormat = "MMM d, h:mm a"
+        
+        if let finalDate = chatDate {
+            let finalDate = newFormtter.string(from: finalDate)
+            timeStampLbl.text = finalDate
+        }
+    } // End Configure Cell
     
     
-    
-}
-
-
-
-// MessageCell:  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+} // END Class.
 
 
 

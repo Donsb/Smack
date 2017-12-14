@@ -9,6 +9,7 @@
 import UIKit
 
 @IBDesignable // See this in storyboard.
+
 class GradientView: UIView {
     
     /*
@@ -20,14 +21,14 @@ class GradientView: UIView {
         didSet {
             self.setNeedsLayout()
         }
-    }
+    } // End Top Color.
     
     // Second colour to use.
     @IBInspectable var bottomColor: UIColor = UIColor.green {
         didSet {
             self.setNeedsLayout()
         }
-    }
+    } // End Bottom Color
     
     
     /*
@@ -52,9 +53,9 @@ class GradientView: UIView {
         
         // Add the gradient Layer to the UIViews layers.
         self.layer.insertSublayer(gradientLayer, at: 0)
-    }
+    } // End Layout Subviews.
     
     
-}
+} // End Class.
 
 // GradientView:  

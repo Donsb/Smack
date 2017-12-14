@@ -12,7 +12,7 @@ import UIKit
 enum AvatarType {
     case dark
     case light
-}
+} // End Enum.
 
 class AvatarCell: UICollectionViewCell {
     
@@ -32,7 +32,7 @@ class AvatarCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         setUpView()
-    }
+    } // End Awake From Nib.
     
     
     // Set Up View Function
@@ -40,7 +40,7 @@ class AvatarCell: UICollectionViewCell {
         self.layer.backgroundColor = UIColor.lightGray.cgColor
         self.layer.cornerRadius = 10
         self.clipsToBounds = true // avoids the layer doesn't spill ostide the corner radius.
-    }
+    } // End Set Up View.
     
     
     // Configuration Cell Function
@@ -52,13 +52,9 @@ class AvatarCell: UICollectionViewCell {
             avatarImage.image = UIImage(named: "light\(index)")
             self.layer.backgroundColor = UIColor.gray.cgColor
         }
-    }
+    } // End Configure Cell.
     
 } // End Class.
-
-
-// AvatarCell: 
-
 
 
 

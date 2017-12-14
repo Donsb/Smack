@@ -21,11 +21,13 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var sendBtn: UIButton!
     @IBOutlet weak var typingUsersLbl: UILabel!
     
+    
     /*
      Instance Variables
      */
     
     var isTyping = false
+    
     
     /*
      Functions
@@ -84,20 +86,6 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             }
         }
         
-//        SocketService.instance.getChatMessage { (success) in
-//            if success {
-//                self.tableView.reloadData()
-//                if MessageService.instance.messages.count > 0 {
-//
-//                    // Create variable to the last message in our message array.
-//                    let endInex = IndexPath.init(row: MessageService.instance.messages.count - 1, section: 0)
-//
-//                    // Set the TableView's position to that final spot
-//                    self.tableView.scrollToRow(at: endInex, at: .bottom, animated: false)
-//                }
-//            }
-//        }
-        
         // Get Typing Users Socket Service call.
         SocketService.instance.getTypingUsers { (typingUsers) in
             
@@ -146,14 +134,16 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 NotificationCenter.default.post(name: NOTIF_USER_DATA_DID_CHANGE, object: nil)
             })
         }
-    }
+        
+        
+    } // End View Did Load.
     
     
     // Did Receive Memory Warning Function.
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
+    } // End Did Receive Memory Warning.
     
     
     // User Data Did Change Function.
@@ -165,10 +155,10 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             // Clear TableView of Chat Messages is logged out.
             tableView.reloadData()
         }
-    }
+    } // End User Data Did Change.
     
     
-    //
+    // On Login Get Message Function.
     func onLoginGetMessages() {
         MessageService.instance.findAllChannel { (success) in
             if success {
@@ -187,13 +177,13 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 }
             }
         }
-    }
+    } // End On Login Get Messages.
     
     
     // Channel Selected Function
     @objc func channelSelected(_ notif: Notification) {
         updateWithChannel()
-    }
+    } // End Channel Selected.
     
     
     // Update With Channel Function
@@ -203,13 +193,14 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         
         // Call Get Messages Function.
         getMessages()
-    }
+    } // End Update With Channel.
     
     
     // Handle Tap Function.
     @objc func handleTap() {
         view.endEditing(true)
-    }
+    } // End Handle Tap.
+    
     
     // Get Messages Function
     func getMessages() {
@@ -227,7 +218,7 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             
         }
         
-    }
+    } // End Get Messages.
     
     
     // Text Editing Function
@@ -252,7 +243,7 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             }
             isTyping = true
         }
-    }
+    } // End Editing.
     
     
     // Send Message Pressed Function
@@ -280,7 +271,7 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 }
             })
         }
-    }
+    } // End Send Message Pressed.
     
     
     // Cell For Row At Function.
@@ -293,40 +284,21 @@ class ChatVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         } else {
             return UITableViewCell()
         }
-    }
+    } // End Cell For Row At.
     
     
     // Number of Sections Function.
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
-    }
+    } // End Number Of Sections
     
     
     // Number of Rows in Section Function.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return MessageService.instance.messages.count
-    }
+    } // End Number Of Rows In Section.
     
     
-}
-
-// ChatVC:  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+} // End Class.
 
 

@@ -22,11 +22,13 @@ class SocketService: NSObject {
     // As this is a NSObject class, we need an init.
     override init() {
         super.init()
-    }
+    } // End init.
     
     // Create Socket
     //let manager: SocketManager = SocketManager(socketURL: URL(string: BASE_URL)!, config: [.log(true), .compress])
-    let manager: SocketManager = SocketManager(socketURL: URL(string: BASE_URL)!) // This one works better.
+    
+    // This one works better.
+    let manager: SocketManager = SocketManager(socketURL: URL(string: BASE_URL)!)
     
     /*
      Functions
@@ -35,13 +37,13 @@ class SocketService: NSObject {
     // Make Connection
     func establishConnection() {
         manager.defaultSocket.connect()
-    }
+    } // End Establish Connection.
     
     
     // Disconnect
     func closeConnection() {
         manager.defaultSocket.disconnect()
-    }
+    } // End Close Connection.
     
     
     // Add Channel Function
@@ -51,7 +53,7 @@ class SocketService: NSObject {
         
         manager.defaultSocket.emit("newChannel", channelName, channelDescription)
         completion(true)
-    }
+    } // End Add Channel.
     
     
     // Detect Channels from the Server
@@ -71,7 +73,7 @@ class SocketService: NSObject {
             MessageService.instance.channels.append(newChannel)
             completion(true)
         }
-    }
+    } // End Get Channel.
     
     
     //  Add Messages Function -> Add Messages to API.
@@ -84,7 +86,7 @@ class SocketService: NSObject {
         manager.defaultSocket.emit("newMessage", messageBody, userId, channelId, user.name, user.avatarName, user.avatarColor)
         completion(true)
         
-    }
+    } // End Add Message.
     
     
     // Get Chat Message Function
@@ -110,7 +112,7 @@ class SocketService: NSObject {
             completion(newMessage)
             }
         }
-    }
+    } // End Get Chat Message.
     
     
     // Get Typing Users Function.
@@ -124,37 +126,9 @@ class SocketService: NSObject {
             completionHandler(typingUsers)
             
         }
-    }
+    } // End Get Typing Users
     
     
     
 } // End Class.
-
-
-
-
-
-// SocketService:  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
