@@ -80,7 +80,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Message:" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q5P-pu-r1E">
-                                <rect key="frame" x="0.0" y="772" width="375" height="40"/>
+                                <rect key="frame" x="0.0" y="748" width="375" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="eUf-Vo-dcE"/>
                                 </constraints>
@@ -92,14 +92,14 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dnZ-mE-mpv">
-                                <rect key="frame" x="337" y="777" width="30" height="30"/>
+                                <rect key="frame" x="345" y="753" width="30" height="30"/>
                                 <state key="normal" image="send"/>
                                 <connections>
                                     <action selector="sendMessagePressed:" destination="NIj-2I-Z7j" eventType="touchUpInside" id="RPz-VP-ZCQ"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iBa-pB-vMQ">
-                                <rect key="frame" x="0.0" y="97" width="375" height="645"/>
+                                <rect key="frame" x="0.0" y="97" width="375" height="622"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="messageCell" rowHeight="66" id="lU4-jc-rRB" customClass="MessageCell" customModule="Smack" customModuleProvider="target">
@@ -158,7 +158,7 @@
                                 </prototypes>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uBW-9c-ABB">
-                                <rect key="frame" x="8" y="768" width="0.0" height="0.0"/>
+                                <rect key="frame" x="16" y="744" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -168,17 +168,17 @@
                         <constraints>
                             <constraint firstItem="iBa-pB-vMQ" firstAttribute="leading" secondItem="J0n-yH-rlG" secondAttribute="leading" id="6zX-oK-4xK"/>
                             <constraint firstItem="iBa-pB-vMQ" firstAttribute="trailing" secondItem="J0n-yH-rlG" secondAttribute="trailing" id="8Fd-ZK-w9a"/>
-                            <constraint firstItem="uBW-9c-ABB" firstAttribute="leading" secondItem="J0n-yH-rlG" secondAttribute="leading" constant="8" id="9sU-Cd-XWv"/>
                             <constraint firstItem="J0n-yH-rlG" firstAttribute="trailing" secondItem="Q5P-pu-r1E" secondAttribute="trailing" id="DI3-zr-Dba"/>
+                            <constraint firstItem="Q5P-pu-r1E" firstAttribute="top" secondItem="uBW-9c-ABB" secondAttribute="bottom" constant="4" id="G5F-fe-VOA"/>
                             <constraint firstItem="iBa-pB-vMQ" firstAttribute="top" secondItem="LFo-P7-Unh" secondAttribute="bottom" id="LA0-zL-z0H"/>
-                            <constraint firstAttribute="bottom" secondItem="Q5P-pu-r1E" secondAttribute="bottom" id="NdY-Zd-fpp"/>
-                            <constraint firstItem="Q5P-pu-r1E" firstAttribute="top" secondItem="uBW-9c-ABB" secondAttribute="bottom" constant="4" id="SGV-4W-vRf"/>
+                            <constraint firstAttribute="bottom" secondItem="Q5P-pu-r1E" secondAttribute="bottom" constant="24" id="NdY-Zd-fpp"/>
+                            <constraint firstItem="uBW-9c-ABB" firstAttribute="leading" secondItem="J0n-yH-rlG" secondAttribute="leading" constant="16" id="ZYc-VD-TUE"/>
                             <constraint firstItem="LFo-P7-Unh" firstAttribute="leading" secondItem="J0n-yH-rlG" secondAttribute="leading" id="aJs-JK-1aL"/>
                             <constraint firstItem="dnZ-mE-mpv" firstAttribute="centerY" secondItem="Q5P-pu-r1E" secondAttribute="centerY" id="gaL-5N-C91"/>
                             <constraint firstItem="Q5P-pu-r1E" firstAttribute="leading" secondItem="J0n-yH-rlG" secondAttribute="leading" id="hk4-Hi-5pr"/>
-                            <constraint firstItem="Q5P-pu-r1E" firstAttribute="top" secondItem="iBa-pB-vMQ" secondAttribute="bottom" constant="30" id="rqj-af-0kH"/>
+                            <constraint firstItem="Q5P-pu-r1E" firstAttribute="top" secondItem="iBa-pB-vMQ" secondAttribute="bottom" constant="29" id="rqj-af-0kH"/>
                             <constraint firstItem="LFo-P7-Unh" firstAttribute="top" secondItem="XYP-pf-WaV" secondAttribute="top" id="sT4-Fi-tO9"/>
-                            <constraint firstAttribute="trailing" secondItem="dnZ-mE-mpv" secondAttribute="trailing" constant="8" id="uUk-iI-0oa"/>
+                            <constraint firstAttribute="trailing" secondItem="dnZ-mE-mpv" secondAttribute="trailing" id="uUk-iI-0oa"/>
                             <constraint firstItem="LFo-P7-Unh" firstAttribute="trailing" secondItem="J0n-yH-rlG" secondAttribute="trailing" id="vEO-QI-tAe"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="J0n-yH-rlG"/>

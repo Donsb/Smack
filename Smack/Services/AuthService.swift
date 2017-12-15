@@ -99,18 +99,23 @@ class AuthService {
         ]
         
         // Wenb Request -> Alamofire Request
+/*
+         Changed To Response String.
+         */
         Alamofire.request(URL_LOGIN, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
-            
+            //print("Start of Alamofire request")
+            //print(body)
             if response.result.error == nil {
-                    
+                    //print("Response is nil")
                     guard let data = response.data else { return }
                     do {
                         
                         let json = try JSON(data:data)
-                        
+                        //print("Login: try \(json)")
                         self.userEmail = json["user"].stringValue
                         self.authToken = json["token"].stringValue
                         
+                        //print(response)
                         // Set isLggedIn to true.
                         self.isLoggedIn = true
                         completion(true)
@@ -120,7 +125,7 @@ class AuthService {
                     }
                 
             } else {
-                print("Error in Login User Function")
+                //print("Error in Login User Function")
                 completion(false)
                 debugPrint(response.result.error as Any)
             }
@@ -169,13 +174,21 @@ class AuthService {
         // Web Request. This is called after login, so we have access to userEmail for this call.
         Alamofire.request("\(URL_USER_BY_EMAIL)\(userEmail)", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: BEARER_HEADER).responseJSON { (response) in
             
+            // Debug Issue
+//            print("Find User Email: Request Started")
+//            print("")
+//            print("\(URL_USER_BY_EMAIL)\(self.userEmail)")
+//            print("")
+//            print("The error is: \(response.result.error as Any)")
+            
             if response.result.error == nil {
+                //print("Find User Email: Response is nil")
                     guard let data = response.data else { return }
                     self.setUserInfo(data: data)
                     completion(true)
                 
             } else {
-                print("Error in AuthService Find User By Email")
+                //print("Error in AuthService Find User By Email")
                 completion(false)
                 debugPrint(response.result.error as Any)
             }
@@ -186,8 +199,11 @@ class AuthService {
     // Set User Info Funcion
     func setUserInfo(data: Data) {
         do {
+// Dubug
+            //print("Start set User Info")
             let json = try JSON(data: data)
             
+            //print("Set User Info: json is \(json)")
             let id = json["_id"].stringValue
             let color = json["avatarColor"].stringValue
             let avatarName = json["avatarName"].stringValue
@@ -196,7 +212,7 @@ class AuthService {
             
             UserDataService.instance.setUserData(id: id, color: color, avatarName: avatarName, email: email, name: name)
         } catch {
-            print("Error in Set User Info Function")
+            //print("Error in Set User Info Function")
             debugPrint(error as Any)
         }
     } // End set User Info
